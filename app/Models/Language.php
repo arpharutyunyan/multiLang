@@ -16,4 +16,8 @@ class Language extends Model
     public function category_translations(){
         return $this->belongsTo(CategoryTranslation::class);
     }
+
+    public function product_translations(){
+        return $this->belongsTo(ProductTranslation::class);
+    }
 }

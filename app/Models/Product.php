@@ -12,4 +12,8 @@ class Product extends Model
     public $fillable = [
         'price'
     ];
+
+    public function product_translations(){
+        return $this->belongsTo(ProductTranslation::class);
+    }
 }
