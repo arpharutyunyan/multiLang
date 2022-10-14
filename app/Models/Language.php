@@ -12,4 +12,8 @@ class Language extends Model
     public $fillable = [
         'code'
     ];
+
+    public function category_translations(){
+        return $this->belongsTo(CategoryTranslation::class);
+    }
 }
