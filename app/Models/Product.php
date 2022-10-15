@@ -13,11 +13,11 @@ class Product extends Model
         'price'
     ];
 
-    public function translations(){
-        return $this->belongsTo(ProductTranslation::class);
+    public function translation(){
+        return $this->belongsToMany(Language::class, 'product_translations');
     }
 
     public function category(){
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 }

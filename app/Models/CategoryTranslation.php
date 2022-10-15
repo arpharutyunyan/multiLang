@@ -14,14 +14,4 @@ class CategoryTranslation extends Model
         'language_code',
         'title'
     ];
-
-    public function categories(){
-        return $this->hasMany(Category::class);
-    }
-
-    public function languages(){
-        return $this->hasMany(Language::class);
-    }
-
-
 }

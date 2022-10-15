@@ -16,11 +16,4 @@ class ProductTranslation extends Model
         'description'
     ];
 
-    public function products(){
-        return $this->hasMany(Product::class);
-    }
-
-    public function languages(){
-        return $this->hasMany(Language::class);
-    }
 }

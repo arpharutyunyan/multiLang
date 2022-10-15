@@ -21,11 +21,11 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function translations(){
-        return $this->belongsTo(CategoryTranslation::class);
+    public function translation(){
+        return $this->belongsToMany(Language::class, 'product_translations');
     }
 
     public function products(){
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsToMany(Product::class, 'product_categories');
     }
 }
