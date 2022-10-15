@@ -6,10 +6,10 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Category</a>
+                    <a class="nav-link" aria-current="page" href="{{route('category.index')}}">Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Product</a>
+                    <a class="nav-link" aria-current="page" href="#">Product</a>
                 </li>
             </ul>
         </div>
@@ -17,7 +17,7 @@
         <!-- Navigation Links -->
         <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-            @foreach (config('app.available_locales')::all() as $locale)
+            @foreach (config('app.locales')::all() as $locale)
                 <a href="{{ request()->url() }}?language={{ $locale['code'] }}"
                    class="@if (app()->getLocale() == $locale['code']) border-indigo-400 @endif inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out">
                     [{{ strtoupper($locale['code']) }}]
