@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('item');
             $table->string('title');
-            $table->string('language_code');
+            $table->string('locale')->index();
 
             $table->foreign('item')
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
 
-            $table->foreign('language_code')
+            $table->foreign('locale')
                 ->references('code')
                 ->on('languages')
                 ->onDelete('cascade');
