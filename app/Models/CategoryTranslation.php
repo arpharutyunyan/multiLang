@@ -10,8 +10,6 @@ class CategoryTranslation extends Model
     use HasFactory;
 
     public $fillable = [
-        'item',
-        'language_code',
         'title'
     ];
 }
