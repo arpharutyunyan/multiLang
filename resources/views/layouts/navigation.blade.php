@@ -17,7 +17,7 @@
         <!-- Navigation Links -->
         <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-            @foreach (config('app.locales')::all() as $locale)
+            @foreach (config('translatable.locales')::all() as $locale)
                 <a href="{{ request()->url() }}?language={{ $locale['code'] }}"
                    class="@if (app()->getLocale() == $locale['code']) border-indigo-400 @endif inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out">
                     [{{ strtoupper($locale['code']) }}]

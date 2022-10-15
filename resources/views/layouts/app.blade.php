@@ -27,8 +27,8 @@
         </div>
 
         <!-- Page Content -->
-        <main>
+        <div class="m-5">
             @yield('content')
-        </main>
+        </div>
     </body>
 </html>

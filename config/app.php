@@ -82,11 +82,7 @@ return [
     |
     */
 
-//    'locale' => 'en',
-    'locales' => \App\Models\Language::class,
-
-//    'available_locales' => ['en', 'hy'],
-//    'available_locales' => \App\Models\Language::class,
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
