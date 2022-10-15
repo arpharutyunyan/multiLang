@@ -84,6 +84,9 @@ return [
 
     'locale' => 'en',
 
+//    'available_locales' => ['en', 'hy'],
+    'available_locales' => \App\Models\Language::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
