@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\CategoryTranslation;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,8 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::with('category_translations')->get();
-//        dd($data);
+        $data = Category::withTranslation()
+            ->translatedIn(app()->getLocale())
+            ->get();
+
         return view('category.index', compact('data'));
     }
 
@@ -26,7 +30,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        $categories = Category::withTranslation()
+            ->translatedIn(app()->getLocale())
+            ->get();
+
+        return view('category.create', compact('categories'));
     }
 
     /**
@@ -35,20 +43,44 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        dd($request);
+//        dd($request->validated());
+        $category = Category::create($request->validated());
+        $locales = config('translatable.locales')::all();
+        foreach(config('translatable.locales')::all() as $locales){
+            $cat_trans = new CategoryTranslation();
+            $cat_trans->item = $category->id;
+            $cat_trans->locale = $locales['code'];
+            $cat_trans->title = $request->validated()[$locales['code']]['title'];
+
+            $cat_trans->save();
+        }
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
     {
-        //
+        $categories = $category;
+
+        // show translation with all languages
+        $locales = config('translatable.locales')::select(['code'])->get();
+
+        foreach($locales as $locale) {
+            $locale = $locale['code'];
+            $categories['title_'.$locale] = CategoryTranslation::where('item', $category->id)
+                ->where('locale', $locale)
+                ->get()[0]['title'];
+        }
+
+        return view('category.show', compact('categories'));
     }
 
     /**

@@ -21,6 +21,7 @@
                 <tr>
                     <th>id</th>
                     <th>Parent id</th>
+                    <th>Title</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Actions</th>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->parent_id}}</td>
+                        <td>{{$item->title}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td>

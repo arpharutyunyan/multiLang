@@ -12,4 +12,6 @@ class CategoryTranslation extends Model
     public $fillable = [
         'title'
     ];
+
+
 }
