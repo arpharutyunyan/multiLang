@@ -9,30 +9,37 @@
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
                         <label>id</label>
-                        <p><b>{{$category->id}}</b></p>
+                        <p><b>{{$product->id}}</b></p>
                     </div>
                     <div class="form-group">
                         @foreach(config('translatable.locales')::all() as $locale)
                             @php
-                                $title = $locale['code'].'.title'
+                                $title = $locale['code'].'.title';
+                                $description = $locale['code'].'.description'
                             @endphp
-                        <label>Title.{{$locale['code']}}</label>
-                        <p><b>{{$category->$title}}</b></p>
+                            <label>title.{{$locale['code']}}</label>
+                            <p><b>{{$product->$title}}</b></p>
+                            <label>description.{{$locale['code']}}</label>
+                            <p><b>{{$product->$description}}</b></p>
                         @endforeach
                     </div>
                     <div class="form-group">
-                        <label>Parent id</label>
-                        <p><b>{{$category->parent_id}}</b></p>
+                        <label>Price</label>
+                        <p><b>{{$product->price}}</b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Category id</label>
+                        <p><b>{{$product->category_id}}</b></p>
                     </div>
                     <div class="form-group">
                         <label>Created At</label>
-                        <p><b>{{$category->created_at}}</b></p>
+                        <p><b>{{$product->created_at}}</b></p>
                     </div>
                     <div class="form-group">
                         <label>Updated At</label>
-                        <p><b>{{$category->updated_at}}</b></p>
+                        <p><b>{{$product->updated_at}}</b></p>
                     </div>
-                    <p><a href="{{route('category.index')}}" class="btn col-auto bg-dark text-white">Back</a></p>
+                    <p><a href="{{route('product.index')}}" class="btn col-auto bg-dark text-white">Back</a></p>
                 </div>
             </div>
         </div>
