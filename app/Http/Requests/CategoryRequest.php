@@ -27,7 +27,8 @@ class CategoryRequest extends FormRequest
             'parent_id' => 'integer',
         ];
 
-        foreach (config('translatable.locales')::all() as $locale){
+        $locales = config('translatable.locales')::all();
+        foreach ($locales as $locale){
             $rules[$locale['code'].'.title'] = 'required|string';
         }
 

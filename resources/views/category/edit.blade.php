@@ -47,7 +47,7 @@
                                 <select name="parent_id">
                                     <option selected disabled>parent category</option>
                                     @foreach($categories as $item)
-                                        <option value={{$item->id}}>{{$item->id}}</option>
+                                        <option value={{$item->id}}>{{$item->title}}</option>
                                     @endforeach
                                 </select>
                                 @error('parent_id')

@@ -7,7 +7,7 @@
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-8"><h2>Category <b>List</b></h2></div>
+                    <div class="col-sm-8"><h2><b>Category</b> List</h2></div>
                     <div class="col-sm-4">
                         <a href={{route('category.create')}}>
                             <span class="btn btn add-new col-auto bg-dark text-white">Add New</span>
