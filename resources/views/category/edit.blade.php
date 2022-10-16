@@ -37,11 +37,12 @@
                             <div class="form-group mt-2">
                                 <label for="parent_id">Choose parent category</label>
                                 <select name="parent_id">
-                                    <option value="{{$category->parent_id}}" selected disabled>{{$category->parent_id}}</option>
+                                    <option selected value="{{$category->parent_id}}">{{$category->parent_id}}</option>
                                     @foreach($categories as $item)
                                         <option value={{$item->id}}>{{$item->title}}</option>
                                     @endforeach
                                 </select>
+
                                 @error('parent_id')
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror

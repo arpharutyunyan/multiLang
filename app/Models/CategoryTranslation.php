@@ -23,7 +23,7 @@ class CategoryTranslation extends Model
 
         foreach ($locales as $locale) {
 
-            $local = $locale['code'];
+            $locale = $locale['code'];
 
             // find items with given locale
             $findItem = self::where('item', $id)
