@@ -9,6 +9,10 @@
                 @foreach(config('translatable.locales')::all() as $locale)
                     <label for="{{$locale['code']}}[title]">Title_{{$locale['code']}}</label>
                     <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
+
+                    @error($locale['code'].'.title')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
                 @endforeach
             </div>
         </div>

@@ -14,7 +14,7 @@
                     <div class="form-group">
                         @foreach(config('translatable.locales')::all() as $locales)
                             @php
-                                $title = 'title_'.$locales['code']
+                                $title = $locales['code'].'.title'
                             @endphp
                         <label>Title.{{$locales['code']}}</label>
                         <p><b><?php echo $categories->$title; ?></b></p>

@@ -72,10 +72,9 @@ class CategoryController extends Controller
 
         // show translation with all languages
         $locales = config('translatable.locales')::select(['code'])->get();
-
         foreach($locales as $locale) {
             $locale = $locale['code'];
-            $categories['title_'.$locale] = CategoryTranslation::where('item', $category->id)
+            $categories[$locale.'.title'] = CategoryTranslation::where('item', $category->id)
                 ->where('locale', $locale)
                 ->get()[0]['title'];
         }
@@ -91,19 +90,42 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+//        $categories = $category;
+
+        // show translation with all languages
+        $locales = config('translatable.locales')::select(['code'])->get();
+        foreach($locales as $locale) {
+            $locale = $locale['code'];
+            $category[$locale.'.title'] = CategoryTranslation::where('item', $category->id)
+                ->where('locale', $locale)
+                ->get()[0]['title'];
+        }
+
+        $categories = Category::all();
+
+        return view('category.edit', compact('category', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $request->validated();
+        $category->parent_id = $request->parent_id;
+        $category->save();
+//        $locales = config('translatable.locales')::all();
+        foreach(config('translatable.locales')::all() as $locales){
+            CategoryTranslation::where('item', $category->id)
+                ->where('locale', $locales['code'])
+                ->update(['title' => $request->validated()[$locales['code']]['title']]);
+        }
+
+        return redirect()->route('category.index');
     }
 
     /**

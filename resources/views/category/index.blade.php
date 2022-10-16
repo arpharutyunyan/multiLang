@@ -41,7 +41,7 @@
                                 $name = 'category';
                             @endphp
                             <a href={{route('category.show', $id )}} class="btn" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-2x" style="color: #323539"></i></a>
-                            <a href={{route('category.update', $id)}} class="btn" title="Edit" data-toggle="tooltip"><i class="material-icons" style="color: #323539">&#xE254;</i></a>
+                            <a href={{route('category.edit', $id)}} class="btn" title="Edit" data-toggle="tooltip"><i class="material-icons" style="color: #323539">&#xE254;</i></a>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalDelete{{$id, $name}}" title="Delete">
                                 <i class="material-icons" style="color: #323539">&#xE872;</i>
                             </button>
