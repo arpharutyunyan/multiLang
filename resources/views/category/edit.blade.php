@@ -17,17 +17,13 @@
 
                         @foreach(config('translatable.locales')::all() as $locale)
 
-                            <div class="form-group mt-2">
-                                <label>Old title_{{$locale['code']}}</label>
-                                @php
-                                    $title = $locale['code'].'.title'
-                                @endphp
-                                <input type="text" class="form-control" value="{{$category->$title}}" disabled>
-                            </div>
+                            @php
+                                $title = $locale['code'].'.title'
+                            @endphp
 
                             <div class="form-group mt-2">
                                 <label>New title_{{$locale['code']}}</label>
-                                <input type="text" name="{{$locale['code']}}[title]" class="form-control">
+                                <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                 @error($title)
                                 <div class="alert alert-danger">{{$message}}</div>
@@ -35,17 +31,13 @@
                             </div>
 
                         @endforeach
-                        <div class="form-group mt-2">
-                            <label>Old parent_id</label>
-                            <input type="text" class="form-control" value="{{$category->parent_id}}" disabled>
-                        </div>
 
                         <div class="form-group mt-2">
                             <label>New parent_id</label>
                             <div class="form-group mt-2">
-{{--                                <label for="parent_id">Choose parent category</label>--}}
+                                <label for="parent_id">Choose parent category</label>
                                 <select name="parent_id">
-                                    <option selected disabled>parent category</option>
+                                    <option value="{{$category->parent_id}}" selected disabled>{{$category->parent_id}}</option>
                                     @foreach($categories as $item)
                                         <option value={{$item->id}}>{{$item->title}}</option>
                                     @endforeach
@@ -57,7 +49,7 @@
                         </div>
 
                         <input type="submit" class="btn col-auto bg-dark text-white mt-2" value="Submit">
-                        <a href={{route('category.index')}} class="btn mt-2" style="border-color: black">Cancel</a>
+                        <a href="{{route('category.index')}}" class="btn mt-2" style="border-color: black">Cancel</a>
                     </form>
                 </div>
             </div>
