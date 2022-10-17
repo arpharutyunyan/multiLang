@@ -67,7 +67,7 @@ class CategoryTranslation extends Model
             ->first();
 
         if ($parent){
-            $item['parent'] = $parent['title'];
+            $item['parent'] = $parent;
         }
     }
 

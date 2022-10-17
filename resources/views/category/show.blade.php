@@ -20,10 +20,12 @@
                         <p><b>{{$category->$title}}</b></p>
                         @endforeach
                     </div>
-                    <div class="form-group">
-                        <label>Parent category</label>
-                        <p><b>{{$category->parent}}</b></p>
-                    </div>
+                    @if(isset($category->parent['title']))
+                        <div class="form-group">
+                            <label>Parent category</label>
+                            <p><b>{{$category->parent['title']}}</b></p>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label>Created At</label>
                         <p><b>{{$category->created_at}}</b></p>

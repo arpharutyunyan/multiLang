@@ -23,9 +23,7 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'parent_id' => 'integer',
-        ];
+        $rules = [];
 
         $locales = config('translatable.locales')::all();
         foreach ($locales as $locale){
