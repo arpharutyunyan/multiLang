@@ -64,6 +64,22 @@ class ProductTranslation extends Model
             $item[$locale.'.description'] = $data['description'];
 
         }
+
+        // get category id with given product id
+        $category = ProductCategory::select(['category_id'])
+            ->where('product_id', $item->id)
+            ->first();
+
+        // get category title
+        $category = CategoryTranslation::where('item', $category['category_id'])
+            ->where('locale', app()->getLocale())
+            ->first();
+
+        // set category in the request array
+        if ($category){
+            $item['category'] = $category['title'];
+        }
+
     }
 
 }

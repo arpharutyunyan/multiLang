@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 class CategoryTranslation extends Model
 {
@@ -58,6 +59,15 @@ class CategoryTranslation extends Model
             $item[$locale.'.title'] = self::where('item', $item->id)
                 ->where('locale', $locale)
                 ->first()['title'];
+        }
+
+        // set parent title in the request array
+        $parent = self::where('item', $item->parent_id)
+            ->where('locale', app()->getLocale())
+            ->first();
+
+        if ($parent){
+            $item['parent'] = $parent['title'];
         }
     }
 

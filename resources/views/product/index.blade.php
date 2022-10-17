@@ -20,7 +20,6 @@
                 <thead>
                 <tr>
                     <th>id</th>
-                    <th>Category id</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Price</th>
@@ -33,7 +32,6 @@
                 @foreach($data as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->category_id}}</td>
                         <td>{{$item->title}}</td>
                         <td>{{$item->description}}</td>
                         <td>{{$item->price}}</td>

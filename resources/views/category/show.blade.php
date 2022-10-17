@@ -21,8 +21,8 @@
                         @endforeach
                     </div>
                     <div class="form-group">
-                        <label>Parent id</label>
-                        <p><b>{{$category->parent_id}}</b></p>
+                        <label>Parent category</label>
+                        <p><b>{{$category->parent}}</b></p>
                     </div>
                     <div class="form-group">
                         <label>Created At</label>
