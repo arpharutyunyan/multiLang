@@ -17,18 +17,20 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('item');
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->string('locale')->index();
 
             $table->foreign('item')
                 ->references('id')
                 ->on('products')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('locale')
                 ->references('code')
                 ->on('languages')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
         });

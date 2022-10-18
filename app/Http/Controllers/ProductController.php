@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         $data = Product::getItemsWithTranslation();
-//        dd($data);
+
         return view('product.index', compact('data'));
     }
 
@@ -47,6 +47,7 @@ class ProductController extends Controller
     {
         $item = Product::create($request->validated());
 
+        // fill in productCategory table
         ProductCategory::updateOrCreate(
             ['product_id' => $item->id],
             ['category_id' => $request['category_id']]

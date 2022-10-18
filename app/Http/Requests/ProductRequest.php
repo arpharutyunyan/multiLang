@@ -24,7 +24,8 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'price' => 'integer',
+            'price' => 'required|integer',
+            'category_id' => 'required',
         ];
 
         $locales = config('translatable.locales')::all();

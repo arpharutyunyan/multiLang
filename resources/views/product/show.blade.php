@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label>Category id</label>
-                        <p><b>{{$product->category}}</b></p>
+                        <p><b>{{$product->parent['title']}}</b></p>
                     </div>
                     <div class="form-group">
                         <label>Created At</label>

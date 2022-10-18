@@ -71,13 +71,13 @@ class ProductTranslation extends Model
             ->first();
 
         // get category title
-        $category = CategoryTranslation::where('item', $category['category_id'])
+        $parent = CategoryTranslation::where('item', $category['category_id'])
             ->where('locale', app()->getLocale())
             ->first();
 
         // set category in the request array
-        if ($category){
-            $item['category'] = $category['title'];
+        if ($parent){
+            $item['parent'] = $parent;
         }
 
     }

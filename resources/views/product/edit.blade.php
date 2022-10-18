@@ -43,25 +43,30 @@
                         <label for="price">New price</label>
                         <input type="number" class="form-control" name="price" placeholder="{{$product->price}}" value="{{$product->price}}"><br>
 
+                        @error('price')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+
                         <div class="form-group mt-2">
-                            <label>New category id</label>
+                            <label>New category</label>
                             <div class="form-group mt-2">
-                                <label for="category_id">Choose parent category</label>
+                                <label for="category_id">Choose category</label>
                                 <select name="category_id">
-{{--                                    <option selected value="{{$category->id}}">{{$category->id}}</option>--}}
+
+                                    <option selected value="{{$product->parent['item']}}">{{$product->parent['title']}}</option>
                                     @foreach($categories as $item)
-                                        <option value={{$item->id}}>{{$item->title}}</option>
+                                        @if($item->title != $product->parent['title'])
+                                            <option value={{$item->id}}>{{$item->title}}</option>
+                                        @endif
                                     @endforeach
+
                                 </select>
 
-                                @error('category_id')
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
                             </div>
                         </div>
 
                         <input type="submit" class="btn col-auto bg-dark text-white mt-2" value="Submit">
-                        <a href="{{route('category.index')}}" class="btn mt-2" style="border-color: black">Cancel</a>
+                        <a href="{{route('product.index')}}" class="btn mt-2" style="border-color: black">Cancel</a>
                     </form>
                 </div>
             </div>

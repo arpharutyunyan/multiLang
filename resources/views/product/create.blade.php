@@ -32,6 +32,9 @@
 
             <label for="price">Price</label>
             <input type="number" class="form-control" name="price"><br>
+            @error('price')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
 
             <select name="category_id" class="form-select form-select-md check">
                 <option selected disabled>Choose categories</option>
@@ -39,6 +42,10 @@
                     <option value={{$item->id}}>{{$item->title}}</option>
                 @endforeach
             </select><br>
+
+            @error('category_id')
+            <div class="alert alert-danger">{{$message}}</div>
+            @enderror
 
             <button type="submit" class="btn btn col-auto bg-dark text-white m-5">Add</button>
         </div>

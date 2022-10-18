@@ -22,12 +22,14 @@ return new class extends Migration
             $table->foreign('item')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->foreign('locale')
                 ->references('code')
                 ->on('languages')
-                ->onDelete('cascade');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             $table->timestamps();
         });
