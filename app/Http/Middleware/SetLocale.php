@@ -20,7 +20,7 @@ class SetLocale
         $language = 'en'; //default language
 
         if (request('language')){
-            $language = \request('language');
+            $language = request('language');
             session()->put('language', $language);
         }elseif (session('language')){
             $language = session('language');

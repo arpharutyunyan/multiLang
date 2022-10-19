@@ -22,7 +22,7 @@
                             @endphp
 
                             <div class="form-group mt-2">
-                                <label>New title_{{$locale['code']}}</label>
+                                <label>New {{$title}}</label>
                                 <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                 @error($title)

@@ -18,6 +18,7 @@
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
 
+
                     <label for="{{$locale['code']}}[description]">description_{{$locale['code']}}</label>
                     <input type="text" class="form-control" name="{{$locale['code']}}[description]" placeholder="Input description"><br>
 

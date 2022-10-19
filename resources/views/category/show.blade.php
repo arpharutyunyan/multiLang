@@ -16,7 +16,8 @@
                             @php
                                 $title = $locale['code'].'.title'
                             @endphp
-                        <label>Title.{{$locale['code']}}</label>
+
+                        <label>{{$title}}</label>
                         <p><b>{{$category->$title}}</b></p>
                         @endforeach
                     </div>

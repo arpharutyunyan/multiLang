@@ -18,6 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // get all products with translation
         $data = Product::getItemsWithTranslation();
 
         return view('product.index', compact('data'));
@@ -66,6 +67,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        // prepare data for viewing all tables in one request
         ProductTranslation::prepareData($product);
 
         return view('product.show', compact('product'));
@@ -97,9 +99,11 @@ class ProductController extends Controller
     {
         ProductTranslation::createOrUpdate($request->validated(), $product->id);
 
+        // update product table
         $product->price = $request->price;
         $product->save();
 
+        // update productCategory table
         ProductCategory::updateOrCreate(
             ['product_id' => $product->id],
             ['category_id' => $request['category_id']]

@@ -17,7 +17,7 @@ class ProductTranslation extends Model
     // if find the item in table update, if not, create
     public static function createOrUpdate($request, $id)
     {
-
+        // take all language code from config, with query, because variable takes model class name
         $locales = config('translatable.locales')::all();
 
         foreach ($locales as $locale) {
@@ -50,6 +50,7 @@ class ProductTranslation extends Model
     //get category as params and add translated key
     public static function prepareData(&$item){
 
+        // take all language code from config, with query, because variable takes model class name
         $locales = config('translatable.locales')::all();
 
         foreach($locales as $locale) {

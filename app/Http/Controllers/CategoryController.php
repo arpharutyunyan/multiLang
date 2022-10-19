@@ -17,6 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // get all categories with translation
         $data = Category::getItemsWithTranslation();
 
         return view('category.index', compact('data'));
@@ -59,7 +60,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         CategoryTranslation::prepareData($category);
-//        dd($category);
+
         return view('category.show', compact('category'));
     }
 
@@ -71,6 +72,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // prepare data for viewing all tables in one request
         CategoryTranslation::prepareData($category);
 
         $categories = Category::all();
@@ -89,6 +91,7 @@ class CategoryController extends Controller
     {
         CategoryTranslation::createOrUpdate($request->validated(), $category->id);
 
+        // update category table
         $category->parent_id = $request->parent_id;
         $category->save();
 

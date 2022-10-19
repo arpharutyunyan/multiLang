@@ -23,14 +23,14 @@
                             @endphp
 
                             <div class="form-group mt-2">
-                                <label>New title_{{$locale['code']}}</label>
+                                <label>New {{$title}}</label>
                                 <input type="text" value="{{$product->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                 @error($title)
                                 <div class="alert alert-danger">{{$message}}</div>
                                 @enderror
 
-                                <label>New description_{{$locale['code']}}</label>
+                                <label>New {{$description}}</label>
                                 <input type="text" value="{{$product->$description}}" name="{{$locale['code']}}[description]" class="form-control">
 
                                 @error($description)
@@ -41,7 +41,7 @@
                         @endforeach
 
                         <label for="price">New price</label>
-                        <input type="number" class="form-control" name="price" placeholder="{{$product->price}}" value="{{$product->price}}"><br>
+                        <input type="number" class="form-control" name="price" value="{{$product->price}}"><br>
 
                         @error('price')
                         <div class="alert alert-danger">{{$message}}</div>

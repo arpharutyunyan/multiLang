@@ -16,8 +16,10 @@ class Product extends Model implements TranslatableContract
         'price'
     ];
 
+    // attributes which will be translated
     public $translatedAttributes = ['title', 'description'];
 
+    // laravel search in product_translations table foreign key with name 'product_id', but db table has column name 'item'
     protected $translationForeignKey = 'item';
 
     public function category(){

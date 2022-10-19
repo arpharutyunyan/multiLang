@@ -19,7 +19,7 @@ class CategoryTranslation extends Model
     // if find the item in table update, if not, create
     public static function createOrUpdate($request, $id)
     {
-
+        // take all language code from config, with query, because variable takes model class name
         $locales = config('translatable.locales')::all();
 
         foreach ($locales as $locale) {
@@ -50,6 +50,7 @@ class CategoryTranslation extends Model
     //get category as params and add translated key
     public static function prepareData(&$item){
 
+        // take all language code from config, with query, because variable takes model class name
         $locales = config('translatable.locales')::all();
 
         foreach($locales as $locale) {
@@ -61,7 +62,7 @@ class CategoryTranslation extends Model
                 ->first()['title'];
         }
 
-        // set parent title in the request array
+        // set parent title in the request array by getting parent_id from request
         $parent = self::where('item', $item->parent_id)
             ->where('locale', app()->getLocale())
             ->first();

@@ -25,6 +25,7 @@ class CategoryRequest extends FormRequest
     {
         $rules = [];
 
+        // adding in rules translatable attributes with language code like 'en.title'
         $locales = config('translatable.locales')::all();
         foreach ($locales as $locale){
             $rules[$locale['code'].'.title'] = 'required|string';

@@ -17,9 +17,9 @@
                                 $title = $locale['code'].'.title';
                                 $description = $locale['code'].'.description'
                             @endphp
-                            <label>title.{{$locale['code']}}</label>
+                            <label>{{$title}}</label>
                             <p><b>{{$product->$title}}</b></p>
-                            <label>description.{{$locale['code']}}</label>
+                            <label>{{$description}}</label>
                             <p><b>{{$product->$description}}</b></p>
                         @endforeach
                     </div>
