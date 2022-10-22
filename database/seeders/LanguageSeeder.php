@@ -16,8 +16,14 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         Language::insert([
-            ['code' => 'en'],
-            ['code' => 'hy']
+            [
+                'code' => 'en',
+                'title' => 'English'
+            ],
+            [
+                'code' => 'hy',
+                'title' => 'Armenian'
+            ]
         ]);
     }
 }
