@@ -43,7 +43,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $item = Category::create($request->validated());
+        $item = Category::Create(
+            ['parent_id' => $request->parent_id]
+        );
 
         CategoryTranslation::createOrUpdate($request->validated(), $item->id);
 
