@@ -1,18 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" role="tab" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('category.index')}}">Category</a>
+                    <a class="nav-link" role="tab"  href="{{route('category.index')}}">Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('product.index')}}">Product</a>
+                    <a class="nav-link" role="tab" href="{{route('product.index')}}">Product</a>
                 </li>
             </ul>
         </div>
+
 
         <!-- Navigation Links -->
         <ul class="nav nav-tabs">
@@ -27,6 +28,7 @@
                 </li>
              @endforeach
         </ul>
+
     </div>
 </nav>
 

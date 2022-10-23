@@ -5,21 +5,30 @@
     <form action={{route('category.store')}} method="POST">
         @csrf
         <div style="width: 600px; margin: 0 auto;">
-            <div class="form-group">
-                @php
-                    $locales = config('translatable.locales')::all()
-                @endphp
 
+            @php
+                $locales = config('translatable.locales')::all();
+            @endphp
+
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 @foreach($locales as $locale)
-                    <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
-                    <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
-
-                    @error($locale['code'].'.title')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                    <button class="lang nav-link @if($locale['code'] == app()->getLocale()) active @endif" data-bs-toggle="tab"
+                            data-bs-target="#fields_{{$locale['code']}}" type="button" role="tab" aria-selected="true">
+                        {{$locale['title']}}
+                    </button>
                 @endforeach
             </div>
-        </div>
+
+            <div class="tab-content mt-2">
+                @foreach($locales as $locale)
+                        <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
+
+                            <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
+                            <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
+
+                        </div>
+                @endforeach
+            </div>
 
         <div style="width: 600px; margin: 0 auto;">
             <select name="parent_id" class="form-select form-select-md check">
@@ -30,6 +39,7 @@
             </select><br>
 
             <button type="submit" class="btn btn col-auto bg-dark text-white m-5">Add</button>
+        </div>
         </div>
     </form>
 
