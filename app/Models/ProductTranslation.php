@@ -28,19 +28,22 @@ class ProductTranslation extends Model
             $findItem = self::where('item', $id)
                 ->where('locale', $locale)
                 ->first();
+
             if ($findItem) {
 
-                $findItem->update(['title' => $request[$locale]['title'],
-                    'description' => $request[$locale]['description']
-                    ]);
+                foreach ($request[$locale] as $field_name => $value){
+                    $findItem->update([$field_name => $value]);
+                }
 
             }else{
 
                 $item = new ProductTranslation();
                 $item->item = $id;
                 $item->locale = $locale;
-                $item->title = $request[$locale]['title'];
-                $item->description = $request[$locale]['description'];
+
+                foreach ($request[$locale] as $field_name => $value) {
+                    $item->$field_name = $value;
+                }
 
                 $item->save();
             }
@@ -61,9 +64,9 @@ class ProductTranslation extends Model
                 ->first();
 
             //add key like 'en.title'
-            $item[$locale.'.title'] = $data['title'];
-            $item[$locale.'.description'] = $data['description'];
-
+            foreach ((new  Product())->translatedAttributes as $translatedAttributes){
+                $item[$locale.'.'.$translatedAttributes] = $data[$translatedAttributes];
+            }
         }
 
         // get category id with given product id

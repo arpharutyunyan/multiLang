@@ -10,27 +10,43 @@
                     <form action={{route('category.update', $category)}} method="POST">
                         @csrf
                         @method('PUT')
+
+                        @php
+                            $locales = config('translatable.locales')::all()
+                        @endphp
+
+                        <div class="nav nav-tabs mb-2" id="nav-tab" role="tablist">
+                            @foreach($locales as $locale)
+                                <button class="nav-link @if($locale['code'] == app()->getLocale()) active @endif" data-bs-toggle="tab"
+                                        data-bs-target="#fields_{{$locale['code']}}" type="button" role="tab" aria-selected="true">
+                                    {{$locale['title']}}
+                                </button>
+                            @endforeach
+                        </div>
+
                         <div class="form-group">
                             <label>id</label>
                             <input type="text" name="id" class="form-control" value={{$category->id}} disabled>
                         </div>
 
-                        @foreach(config('translatable.locales')::all() as $locale)
+                        <div class="tab-content mt-2">
+                            @foreach($locales as $locale)
+                                @php
+                                    $title = $locale['code'].'.title'
+                                @endphp
 
-                            @php
-                                $title = $locale['code'].'.title'
-                            @endphp
+                                <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                            <div class="form-group mt-2">
-                                <label>New {{$title}}</label>
-                                <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
+                                    <label>New {{$title}}</label>
+                                    <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
-                                @error($title)
-                                <div class="alert alert-danger">{{$message}}</div>
-                                @enderror
-                            </div>
+                                    @error($title)
+                                    <div class="alert alert-danger">{{$message}}</div>
+                                    @enderror
+                                </div>
 
-                        @endforeach
+                            @endforeach
+                        </div>
 
                         <div class="form-group mt-2">
                             <label>New parent_id</label>

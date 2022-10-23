@@ -12,7 +12,7 @@
 
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 @foreach($locales as $locale)
-                    <button class="lang nav-link @if($locale['code'] == app()->getLocale()) active @endif" data-bs-toggle="tab"
+                    <button class="nav-link @if($locale['code'] == app()->getLocale()) active @endif" data-bs-toggle="tab"
                             data-bs-target="#fields_{{$locale['code']}}" type="button" role="tab" aria-selected="true">
                         {{$locale['title']}}
                     </button>
@@ -21,12 +21,16 @@
 
             <div class="tab-content mt-2">
                 @foreach($locales as $locale)
-                        <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
+                    <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                            <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
-                            <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
+                        <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
+                        <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
 
-                        </div>
+                        @error($locale['code'].'.title')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+
                 @endforeach
             </div>
 

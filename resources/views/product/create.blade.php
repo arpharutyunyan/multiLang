@@ -10,22 +10,37 @@
                     $locales = config('translatable.locales')::all()
                 @endphp
 
-                @foreach($locales as $locale)
-                    <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
-                    <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    @foreach($locales as $locale)
+                        <button class="nav-link @if($locale['code'] == app()->getLocale()) active @endif" data-bs-toggle="tab"
+                                data-bs-target="#fields_{{$locale['code']}}" type="button" role="tab" aria-selected="true">
+                            {{$locale['title']}}
+                        </button>
+                    @endforeach
+                </div>
 
-                    @error($locale['code'].'.title')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                <div class="tab-content mt-2">
+                    @foreach($locales as $locale)
+                        <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
+                            <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
+                            <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
 
-                    <label for="{{$locale['code']}}[description]">description_{{$locale['code']}}</label>
-                    <input type="text" class="form-control" name="{{$locale['code']}}[description]" placeholder="Input description"><br>
+                            @error($locale['code'].'.title')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
 
-                    @error($locale['code'].'.description')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
-                @endforeach
+                            <label for="{{$locale['code']}}[description]">description_{{$locale['code']}}</label>
+                            <input type="text" class="form-control" name="{{$locale['code']}}[description]" placeholder="Input description"><br>
+
+                            @error($locale['code'].'.description')
+                            <div class="alert alert-danger">{{$message}}</div>
+                            @enderror
+
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
 

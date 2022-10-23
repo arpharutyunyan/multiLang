@@ -33,14 +33,19 @@ class CategoryTranslation extends Model
 
             if ($findItem) {
 
-                $findItem->update(['title' => $request[$locale]['title']]);
+                foreach ($request[$locale] as $field_name => $value){
+                    $findItem->update([$field_name => $value]);
+                }
 
             }else{
 
                 $item = new CategoryTranslation();
                 $item->item = $id;
                 $item->locale = $locale;
-                $item->title = $request[$locale]['title'];
+
+                foreach ($request[$locale] as $field_name => $value) {
+                    $item->$field_name = $value;
+                }
 
                 $item->save();
             }
