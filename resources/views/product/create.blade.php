@@ -63,7 +63,14 @@
             <div class="alert alert-danger">{{$message}}</div>
             @enderror
 
-            <button type="submit" class="btn btn col-auto bg-dark text-white m-5">Add</button>
+            <div class="row justify-content-end">
+                <div class="col-auto col-sm-auto">
+                    <a href="{{route('product.index')}}" class="btn btn-secondary ">Cancel</a>
+                </div>
+                <div class="col-auto col-sm-auto">
+                    <button type="submit" class="btn btn bg-dark text-white">Add</button>
+                </div>
+            </div>
         </div>
     </form>
 

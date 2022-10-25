@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         // get all categories with translation
         $data = Category::getItemsWithTranslation();
-
+//        dd($data);
         return view('category.index', compact('data'));
     }
 

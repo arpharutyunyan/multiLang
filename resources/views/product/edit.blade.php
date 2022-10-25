@@ -29,7 +29,7 @@
                             <input type="text" name="id" class="form-control" value={{$product->id}} disabled>
                         </div>
 
-                        <div class="tab-content mt-2">
+                        <div class="tab-content mt-3">
                             @foreach($locales as $locale)
                                 @php
                                     $title = $locale['code'].'.title';
@@ -38,14 +38,14 @@
 
                                 <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                                    <label>New {{$title}}</label>
+                                    <label class="text-primary">New {{$title}}</label>
                                     <input type="text" value="{{$product->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                     @error($title)
                                     <div class="alert alert-danger">{{$message}}</div>
                                     @enderror
 
-                                    <label>New {{$description}}</label>
+                                    <label class="text-primary mt-3">New {{$description}}</label>
                                     <input type="text" value="{{$product->$description}}" name="{{$locale['code']}}[description]" class="form-control">
 
                                     @error($description)
@@ -56,15 +56,15 @@
                             @endforeach
                         </div>
 
-                        <label for="price">New price</label>
+                        <label class="text-primary mt-3" for="price">New price</label>
                         <input type="number" class="form-control" name="price" value="{{$product->price}}"><br>
 
                         @error('price')
                         <div class="alert alert-danger">{{$message}}</div>
                         @enderror
 
-                        <div class="form-group mt-2">
-                            <label>New category</label>
+                        <div class="form-group">
+                            <label class="text-primary">New category</label>
                             <div class="form-group mt-2">
                                 <label for="category_id">Choose category</label>
                                 <select name="category_id">
@@ -81,8 +81,8 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn col-auto bg-dark text-white mt-2" value="Submit">
-                        <a href="{{route('product.index')}}" class="btn mt-2" style="border-color: black">Cancel</a>
+                        <input type="submit" class="btn col-auto bg-dark text-white mt-5" value="Submit">
+                        <a href="{{route('product.index')}}" class="btn mt-5" style="border-color: black">Cancel</a>
                     </form>
                 </div>
             </div>

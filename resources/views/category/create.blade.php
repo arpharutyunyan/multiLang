@@ -4,7 +4,7 @@
 
     <form action={{route('category.store')}} method="POST">
         @csrf
-        <div style="width: 600px; margin: 0 auto;">
+        <div style="width: 576px; margin: 0 auto;">
 
             @php
                 $locales = config('translatable.locales')::all();
@@ -34,16 +34,23 @@
                 @endforeach
             </div>
 
-        <div style="width: 600px; margin: 0 auto;">
-            <select name="parent_id" class="form-select form-select-md check">
-                <option selected disabled>Choose categories for subCategory (parent_id)</option>
-                @foreach($data as $item)
-                    <option value={{$item->id}}>{{$item->title}}</option>
-                @endforeach
-            </select><br>
+            <div > {{--style="width: 600px; margin: 0 auto;">--}}
+                <select name="parent_id" class="form-select form-select-md check">
+                    <option selected disabled>Choose categories for subCategory (parent_id)</option>
+                    @foreach($data as $item)
+                        <option value={{$item->id}}>{{$item->title}}</option>
+                    @endforeach
+                </select><br>
+            </div>
 
-            <button type="submit" class="btn btn col-auto bg-dark text-white m-5">Add</button>
-        </div>
+            <div class="row justify-content-end">
+                <div class="col-auto col-sm-auto">
+                    <a href="{{route('category.index')}}" class="btn btn-secondary ">Cancel</a>
+                </div>
+                <div class="col-auto col-sm-auto">
+                    <button type="submit" class="btn btn bg-dark text-white">Add</button>
+                </div>
+            </div>
         </div>
     </form>
 

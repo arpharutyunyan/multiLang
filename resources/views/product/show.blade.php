@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="wrapper">
-        <div class="container-fluid">
+        <div class="container d-flex justify-content-center">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>

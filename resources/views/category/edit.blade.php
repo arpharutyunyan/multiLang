@@ -29,7 +29,7 @@
                             <input type="text" name="id" class="form-control" value={{$category->id}} disabled>
                         </div>
 
-                        <div class="tab-content mt-2">
+                        <div class="tab-content mt-3">
                             @foreach($locales as $locale)
                                 @php
                                     $title = $locale['code'].'.title'
@@ -37,7 +37,7 @@
 
                                 <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                                    <label>New {{$title}}</label>
+                                    <label class="text-primary">New {{$title}}</label>
                                     <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                     @error($title)
@@ -48,8 +48,8 @@
                             @endforeach
                         </div>
 
-                        <div class="form-group mt-2">
-                            <label>New parent_id</label>
+                        <div class="form-group mt-3">
+                            <label class="text-primary">New parent_id</label>
                             <div class="form-group mt-2">
                                 <label for="parent_id">Choose parent category</label>
                                 <select name="parent_id">
@@ -73,8 +73,8 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn col-auto bg-dark text-white mt-2" value="Submit">
-                        <a href="{{route('category.index')}}" class="btn mt-2" style="border-color: black">Cancel</a>
+                        <input type="submit" class="btn col-auto bg-dark text-white mt-5" value="Submit">
+                        <a href="{{route('category.index')}}" class="btn mt-5" style="border-color: black">Cancel</a>
                     </form>
                 </div>
             </div>
