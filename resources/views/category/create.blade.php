@@ -23,7 +23,7 @@
                 @foreach($locales as $locale)
                     <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                        <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
+                        <label for="{{$locale['code']}}[title]">Title ({{$locale['code']}})</label>
                         <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
 
                         @error($locale['code'].'.title')
@@ -45,10 +45,10 @@
 
             <div class="row justify-content-end">
                 <div class="col-auto col-sm-auto">
-                    <a href="{{route('category.index')}}" class="btn btn-secondary ">Cancel</a>
+                    <button type="submit" class="btn btn bg-dark text-white">Add</button>
                 </div>
                 <div class="col-auto col-sm-auto">
-                    <button type="submit" class="btn btn bg-dark text-white">Add</button>
+                    <a href="{{route('category.index')}}" class="btn btn-secondary ">Cancel</a>
                 </div>
             </div>
         </div>

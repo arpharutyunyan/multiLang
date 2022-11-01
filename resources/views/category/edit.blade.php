@@ -37,7 +37,7 @@
 
                                 <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                                    <label class="text-primary">New {{$title}}</label>
+                                    <label class="text-primary">New title ({{$locale['code']}})</label>
                                     <input type="text" value="{{$category->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                     @error($title)
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group mt-3">
-                            <label class="text-primary">New parent_id</label>
+                            <label class="text-primary">New parent category</label>
                             <div class="form-group mt-2">
                                 <label for="parent_id">Choose parent category</label>
                                 <select name="parent_id">

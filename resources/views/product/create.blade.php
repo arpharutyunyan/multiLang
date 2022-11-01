@@ -19,19 +19,19 @@
                     @endforeach
                 </div>
 
-                <div class="tab-content mt-2">
+                <div class="tab-content mt-3">
                     @foreach($locales as $locale)
                         <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                            <label for="{{$locale['code']}}[title]">title_{{$locale['code']}}</label>
+                            <label for="{{$locale['code']}}[title]">Title ({{$locale['code']}})</label>
                             <input type="text" class="form-control" name="{{$locale['code']}}[title]" placeholder="Input title"><br>
 
                             @error($locale['code'].'.title')
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
 
-                            <label for="{{$locale['code']}}[description]">description_{{$locale['code']}}</label>
-                            <input type="text" class="form-control" name="{{$locale['code']}}[description]" placeholder="Input description"><br>
+                            <label class="text-primary">New description ({{$locale['code']}})</label>
+                            <textarea  name="{{$locale['code']}}[description]" class="form-control mt-2" placeholder="Input description"></textarea>
 
                             @error($locale['code'].'.description')
                             <div class="alert alert-danger">{{$message}}</div>
@@ -46,14 +46,14 @@
 
         <div style="width: 600px; margin: 0 auto;">
 
-            <label for="price">Price</label>
+            <label for="price" class="mt-3">Price</label>
             <input type="number" class="form-control" name="price"><br>
             @error('price')
             <div class="alert alert-danger">{{$message}}</div>
             @enderror
 
-            <select name="category_id" class="form-select form-select-md check">
-                <option selected disabled>Choose categories</option>
+            <select name="category_id" class="js-states form-control" id="select">
+                <option></option>
                 @foreach($categories as $item)
                     <option value={{$item->id}}>{{$item->title}}</option>
                 @endforeach
@@ -63,15 +63,36 @@
             <div class="alert alert-danger">{{$message}}</div>
             @enderror
 
-            <div class="row justify-content-end">
-                <div class="col-auto col-sm-auto">
-                    <a href="{{route('product.index')}}" class="btn btn-secondary ">Cancel</a>
-                </div>
+            <div class="row justify-content-end mt-5">
                 <div class="col-auto col-sm-auto">
                     <button type="submit" class="btn btn bg-dark text-white">Add</button>
+                </div>
+                <div class="col-auto col-sm-auto">
+                    <a href="{{route('product.index')}}" class="btn btn-secondary ">Cancel</a>
                 </div>
             </div>
         </div>
     </form>
 
+
+
 @endsection
+
+@push('scripts')
+
+    <script>
+
+        $(document).ready(function() {
+            $("#select").select2({
+                placeholder: "Choose categories",
+                theme: "classic",
+                allowClear: true,
+
+            });
+        });
+
+    </script>
+
+@endpush
+
+

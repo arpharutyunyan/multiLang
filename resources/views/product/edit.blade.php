@@ -38,15 +38,15 @@
 
                                 <div role="tabpanel" class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif fade show" id="fields_{{$locale['code']}}" >
 
-                                    <label class="text-primary">New {{$title}}</label>
+                                    <label class="text-primary">New title ({{$locale['code']}})</label>
                                     <input type="text" value="{{$product->$title}}" name="{{$locale['code']}}[title]" class="form-control">
 
                                     @error($title)
                                     <div class="alert alert-danger">{{$message}}</div>
                                     @enderror
 
-                                    <label class="text-primary mt-3">New {{$description}}</label>
-                                    <input type="text" value="{{$product->$description}}" name="{{$locale['code']}}[description]" class="form-control">
+                                    <label class="text-primary mt-3">New description ({{$locale['code']}})</label>
+                                    <textarea  name="{{$locale['code']}}[description]" class="form-control">{{$product->$description}}</textarea>
 
                                     @error($description)
                                     <div class="alert alert-danger">{{$message}}</div>
