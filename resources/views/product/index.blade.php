@@ -35,8 +35,8 @@
                         <td>{{$item->title}}</td>
                         <td>{{$item->description}}</td>
                         <td>{{$item->price}}</td>
-                        <td>{{$item->created_at}}</td>
-                        <td>{{$item->updated_at}}</td>
+                        <td>{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
+                        <td>{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
                         <td>
                             @php
                                 $id = $item->id;

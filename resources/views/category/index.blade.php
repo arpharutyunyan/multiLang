@@ -20,7 +20,7 @@
                 <thead class="table-primary">
                     <tr>
                         <th>id</th>
-                        <th>Parent id</th>
+                        <th>Parent category</th>
                         <th>Title</th>
                         <th>Created At</th>
                         <th>Updated At</th>
@@ -31,10 +31,32 @@
                 @foreach($data as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->parent_id}}</td>
+                        @php
+                            $hasParent = false
+                        @endphp
+
+{{--                        find the parent category id in given data--}}
+                        @foreach($data as $parent)
+                            @if($parent->id == $item->parent_id)
+                                @php
+                                    $hasParent = true
+                                @endphp
+                                @break
+                            @endif
+                        @endforeach
+
+{{--                        if find and break get parent category title --}}
+                        <td>
+                            @if($hasParent)
+                                {{$parent->title}}
+                            @else
+                                -
+                            @endif
+                        </td>
+
                         <td>{{$item->title}}</td>
-                        <td>{{$item->created_at}}</td>
-                        <td>{{$item->updated_at}}</td>
+                        <td>{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
+                        <td>{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
                         <td>
                             @php
                                 $id = $item->id;
