@@ -30,7 +30,7 @@
                             <div class="alert alert-danger">{{$message}}</div>
                             @enderror
 
-                            <label class="text-primary">New description ({{$locale['code']}})</label>
+                            <label for="{{$locale['code']}}[description]">Description ({{$locale['code']}})</label>
                             <textarea  name="{{$locale['code']}}[description]" class="form-control mt-2" placeholder="Input description"></textarea>
 
                             @error($locale['code'].'.description')
@@ -52,7 +52,7 @@
             <div class="alert alert-danger">{{$message}}</div>
             @enderror
 
-            <select name="category_id" class="js-states form-control" id="select">
+            <select name="category_id" class="form-control" id="select">
                 <option></option>
                 @foreach($categories as $item)
                     <option value={{$item->id}}>{{$item->title}}</option>
@@ -79,12 +79,11 @@
 @endsection
 
 @push('scripts')
-
     <script>
 
         $(document).ready(function() {
             $("#select").select2({
-                placeholder: "Choose categories",
+                placeholder: "Choose category",
                 theme: "classic",
                 allowClear: true,
 
@@ -92,7 +91,6 @@
         });
 
     </script>
-
 @endpush
 
 

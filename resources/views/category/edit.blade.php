@@ -51,10 +51,8 @@
                         <div class="form-group mt-3">
                             <label class="text-primary">New parent category</label>
                             <div class="form-group mt-2">
-                                <label for="parent_id">Choose parent category</label>
-                                <select name="parent_id">
-                                    <option value="">None</option>
-
+                                <select name="parent_id" class="form-control" id="select">
+                                    <option></option>
                                     @if(isset($category->parent['item']))
                                         <option selected value="{{$category->parent['item']}}">{{$category->parent['title']}}</option>
                                         @foreach($categories as $item)
@@ -81,3 +79,18 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+
+        $(document).ready(function() {
+            $("#select").select2({
+                placeholder: "Choose parent category",
+                theme: "classic",
+                allowClear: true,
+
+            });
+        });
+
+    </script>
+@endpush

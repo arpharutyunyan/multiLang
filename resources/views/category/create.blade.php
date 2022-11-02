@@ -35,15 +35,15 @@
             </div>
 
             <div > {{--style="width: 600px; margin: 0 auto;">--}}
-                <select name="parent_id" class="form-select form-select-md check">
-                    <option selected disabled>Choose categories for subCategory (parent_id)</option>
+                <select name="parent_id" class="form-select form-select-md check" id="select">
+                    <option></option>
                     @foreach($data as $item)
                         <option value={{$item->id}}>{{$item->title}}</option>
                     @endforeach
                 </select><br>
             </div>
 
-            <div class="row justify-content-end">
+            <div class="row justify-content-end mt-5">
                 <div class="col-auto col-sm-auto">
                     <button type="submit" class="btn btn bg-dark text-white">Add</button>
                 </div>
@@ -55,3 +55,17 @@
     </form>
 
 @endsection
+
+@push('scripts')
+    <script>
+
+        $(document).ready(function() {
+            $("#select").select2({
+                placeholder: "Choose parent category",
+                theme: "classic",
+                allowClear: true,
+            });
+        });
+
+    </script>
+@endpush

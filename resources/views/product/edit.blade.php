@@ -66,8 +66,7 @@
                         <div class="form-group">
                             <label class="text-primary">New category</label>
                             <div class="form-group mt-2">
-                                <label for="category_id">Choose category</label>
-                                <select name="category_id">
+                                <select name="category_id" class="form-control" id="select">
 
                                     <option selected value="{{$product->parent['item']}}">{{$product->parent['title']}}</option>
                                     @foreach($categories as $item)
@@ -89,3 +88,15 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+
+        $(document).ready(function() {
+            $("#select").select2({
+                theme: "classic",
+            });
+        });
+
+    </script>
+@endpush
