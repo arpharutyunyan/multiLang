@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            <table class="table table-hover">
+            <table class="table table-hover" id="index">
                 <thead class="table-primary">
                 <tr>
                     <th>id</th>
@@ -57,3 +57,12 @@
     </div>
 @endsection
 
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#index').DataTable({
+                "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+            });
+        });
+    </script>
+@endpush
