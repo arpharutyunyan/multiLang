@@ -7,14 +7,18 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, Sortable;
 
     public $fillable = [
         'price'
     ];
+
+    // for sorting datatable
+//    public $sortable = ['id', 'title', 'description', 'price', 'created_at', 'updated_at'];
 
     // attributes which will be translated
     public $translatedAttributes = ['title', 'description'];
