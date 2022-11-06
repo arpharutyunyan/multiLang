@@ -32,7 +32,7 @@ class CategoryController extends Controller
     {
         $data = Category::getItemsWithTranslation();
 
-        return view('category.create', compact('data'));
+        return view('category.createOrEdit', compact('data'));
     }
 
     /**
@@ -77,9 +77,9 @@ class CategoryController extends Controller
         // prepare data for viewing all tables in one request
         CategoryTranslation::prepareData($category);
 
-        $categories = Category::all();
+        $data = Category::all();
 
-        return view('category.edit', compact('category', 'categories'));
+        return view('category.createOrEdit', compact('category', 'data'));
     }
 
     /**
