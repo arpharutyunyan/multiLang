@@ -55,8 +55,8 @@
                         </td>
 
                         <td>{{$item->title}}</td>
-                        <td>{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
-                        <td>{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
+                        <td data-sort="{{$item->created_at}}">{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
+                        <td data-sort="{{$item->updated_at}}">{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
                         <td>
                             @php
                                 $id = $item->id;

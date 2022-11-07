@@ -27,12 +27,12 @@
                             @endforeach
                         </div>
 
-                        @if(isset($category))
-                            <div class="form-group">
-                                <label>id</label>
-                                <input type="text" name="id" class="form-control" value={{$category->id}} disabled>
-                            </div>
-                        @endif
+{{--                        @if(isset($category))--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>id</label>--}}
+{{--                                <input type="text" name="id" class="form-control" value={{$category->id}} disabled>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
 
                         <div class="tab-content mt-3">
                             @foreach($locales as $locale)
