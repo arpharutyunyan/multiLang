@@ -18,8 +18,15 @@ class ProductController extends Controller
      */
     public function index()
     {
+
         // get all products with translation
-        $data = Product::getItemsWithTranslation();
+//        $data = Product::getItemsWithTranslation();
+
+//         sort with url parameters without any packages and plugins
+        $data = Product::getItemsByOrdered(\request()->query());
+
+        // sorting with laravel sortable packages
+//        $data = Product::sortWithLaravelSortable(\request()->query());
 
         return view('product.index', compact('data'));
     }

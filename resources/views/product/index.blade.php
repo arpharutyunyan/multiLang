@@ -19,13 +19,24 @@
             <table class="table table-hover" id="index">
                 <thead class="table-primary">
                 <tr>
-                    <th>id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+{{--                    sorting with laravel packages--}}
+{{--                    <th>@sortablelink('id')</th>--}}
+{{--                    <th>@sortablelink('product_translations.title', 'Title', [])</th>--}}
+{{--                    <th>@sortablelink('product_translations.description', 'Description')</th>--}}
+{{--                    <th>@sortablelink('price', 'Price')</th>--}}
+{{--                    <th>@sortablelink('created_at', 'Created At')</th>--}}
+{{--                    <th>@sortablelink('updated_at', 'Updated At')</th>--}}
+{{--                    <th>Actions</th>--}}
+
+{{--                    draw arrow for decrease and ascending order--}}
+                    <th>@include('product.sort_link', ['column_name' => 'id', 'attribute' => 'id'])</th>
+                    <th>@include('product.sort_link', ['column_name' => 'Title', 'attribute' => 'pt.title'])</th>
+                    <th>@include('product.sort_link', ['column_name' => 'Description', 'attribute' => 'pt.description'])</th>
+                    <th>@include('product.sort_link', ['column_name' => 'Price', 'attribute' => 'price'])</th>
+                    <th>@include('product.sort_link', ['column_name' => 'Created At', 'attribute' => 'created_at'])</th>
+                    <th>@include('product.sort_link', ['column_name' => 'Updated At', 'attribute' => 'updated_at'])</th>
                     <th>Actions</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -41,7 +52,7 @@
                             @php
                                 $id = $item->id;
                                 $name = 'product';
-                            @endphp
+//                            @endphp
                             <a href={{route('product.show', $id )}} class="btn" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-2x" style="color: #323539"></i></a>
                             <a href={{route('product.edit', $id)}} class="btn" title="Edit" data-toggle="tooltip"><i class="material-icons" style="color: #323539">&#xE254;</i></a>
                             <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalDelete{{$id, $name}}" title="Delete">
@@ -59,10 +70,10 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function () {
-            $('#index').DataTable({
-                "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
-            });
-        });
+        // $(document).ready(function () {
+        //     $('#index').DataTable({
+        //         "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+        //     });
+        // });
     </script>
 @endpush

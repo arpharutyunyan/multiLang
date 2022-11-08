@@ -14,6 +14,12 @@ class ProductTranslation extends Model
         'description'
     ];
 
+    public $sortable = ['title', 'description'];
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
     // if find the item in table update, if not, create
     public static function createOrUpdate($request, $id)
     {
