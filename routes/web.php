@@ -26,10 +26,22 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+})->name('welcome');
+
+Route::group(['middleware' => ['auth']], function (){
+
+    Route::resource('category', \App\Http\Controllers\CategoryController::class);
+    Route::resource('product', \App\Http\Controllers\ProductController::class);
+
+    Route::get('/dashboard', function () {
+        return view('layouts.auth');
+//        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
