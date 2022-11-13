@@ -120,14 +120,17 @@ The above copyright notice and this permission notice shall be included in all c
                                 </div>
                                 <div class="col-md-5 mr-auto">
                                     <div class="social text-center">
-                                        <button class="btn btn-just-icon btn-round btn-twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </button>
+{{--                                        <button class="btn btn-just-icon btn-round btn-twitter">--}}
+{{--                                            <i class="fa fa-twitter"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button class="btn btn-just-icon btn-round btn-dribbble">--}}
+{{--                                            <i class="fa fa-dribbble"></i>--}}
+{{--                                        </button>--}}
                                         <button class="btn btn-just-icon btn-round btn-dribbble">
-                                            <i class="fa fa-dribbble"></i>
+                                            <a href="{{route('google')}}"><i class="fa fa-google-plus"></i></a>
                                         </button>
                                         <button class="btn btn-just-icon btn-round btn-facebook">
-                                            <i class="fa fa-facebook"> </i>
+                                            <a href="{{route('facebook')}}"><i class="fa fa-facebook"> </i></a>
                                         </button>
                                         <h4 class="mt-3"> or be classical </h4>
                                     </div>

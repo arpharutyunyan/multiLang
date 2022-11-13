@@ -15,17 +15,13 @@ use Inertia\Inertia;
 |
 */
 
-//Route::get('/', function () {
-//    return Inertia::render('Welcome', [
-//        'canLogin' => Route::has('login'),
-//        'canRegister' => Route::has('register'),
-//        'laravelVersion' => Application::VERSION,
-//        'phpVersion' => PHP_VERSION,
-//    ]);
-//})->name('welcome');
-
 Route::get('/', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create'])->name('welcome');
-require __DIR__.'/auth.php';
+
+Route::get('auth/google', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'redirectToGoogle'])->name('google');
+Route::get('google/callback', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'handleGoogleCallback']);
+
+Route::get('auth/facebook', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'redirectToFacebook'])->name('facebook');
+Route::get('/callback', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'handleFacebookCallback']);
 
 Route::group(['middleware' => ['auth']], function (){
 
@@ -34,7 +30,8 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::get('/dashboard', function () {
         return view('layouts.auth');
-//        return Inertia::render('Dashboard');
     })->name('dashboard');
 
 });
+
+require __DIR__.'/auth.php';

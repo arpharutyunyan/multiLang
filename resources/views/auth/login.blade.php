@@ -86,13 +86,13 @@ The above copyright notice and this permission notice shall be included in all c
                             <div class="card-header card-header-rose text-center">
                                 <h4 class="card-title">Login</h4>
                                 <div class="social-line">
-                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                                    <a href="{{route('facebook')}}" class="btn btn-just-icon btn-link btn-white">
                                         <i class="fa fa-facebook-square"></i>
                                     </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+{{--                                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">--}}
+{{--                                        <i class="fa fa-twitter"></i>--}}
+{{--                                    </a>--}}
+                                    <a href="{{route('google')}}" class="btn btn-just-icon btn-link btn-white">
                                         <i class="fa fa-google-plus"></i>
                                     </a>
                                 </div>
