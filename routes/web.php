@@ -29,8 +29,15 @@ Route::group(['middleware' => ['auth']], function (){
     Route::resource('product', \App\Http\Controllers\ProductController::class);
 
     Route::get('/dashboard', function () {
-        return view('layouts.auth');
+        return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('/user', function () {
+        return view('admin.user');
+    })->name('user');
+
+    Route::put('/user', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'update'])->name('user.update');
+
 
 });
 

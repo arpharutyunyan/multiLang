@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Exception;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,30 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function update(Request $request)
+    {
+        try {
+
+            $user = (Auth::user())['id'];
+            // check if updated email is already registered, but not for this user
+            $userId = User::select('id')->where('email', $request->email)->get()[0]['id'];
+//
+            if($userId != $user){
+               return view('admin.error', ['error' => "The email has already been taken.", 'code' => 422]);
+            }
+        }catch (\ErrorException $exception){
+            // if email not found get()[0] will give "Undefined array key"
+        }
+
+        $user = User::where('id', $user)
+            ->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+        return redirect()->back();
     }
 
     /**
