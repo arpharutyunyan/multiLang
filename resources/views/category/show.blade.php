@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 
@@ -6,7 +6,7 @@
         <div class="container d-flex justify-content-center">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="mt-5 mb-3">View Record</h1>
+                    <h1 class="mt-5 mb-3 text-rose">View Record</h1>
                     <div class="form-group">
                         <label>id</label>
                         <p><b>{{$category->id}}</b></p>
@@ -35,7 +35,7 @@
                         <label>Updated At</label>
                         <p><b>{{$category->updated_at}}</b></p>
                     </div>
-                    <p><a href="{{route('category.index')}}" class="btn col-auto bg-dark text-white">Back</a></p>
+                    <p><a href="{{route('category.index')}}" class="btn btn-fill btn-rose">Back</a></p>
                 </div>
             </div>
         </div>

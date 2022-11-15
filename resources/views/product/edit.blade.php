@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
     <div class="wrapper" style="width: 600px; margin: 0 auto;">

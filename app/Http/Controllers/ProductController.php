@@ -38,11 +38,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $data = Product::getItemsWithTranslation();
+        $product = Product::getItemsWithTranslation();
 
         $categories = Category::all();
 
-        return view('product.create', compact('data', 'categories'));
+        return view('product.createOrEdit', compact('product', 'categories'));
     }
 
     /**
@@ -92,7 +92,7 @@ class ProductController extends Controller
 
         $categories = Category::all();
 
-        return view('product.edit', compact('product', 'categories'));
+        return view('product.createOrEdit', compact('product', 'categories'));
     }
 
     /**

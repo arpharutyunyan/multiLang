@@ -1568,7 +1568,7 @@ demo = {
           type: 'success',
           confirmButtonClass: "btn btn-success",
           buttonsStyling: false
-        })
+        }).catch(swal.noop)
       }).catch(swal.noop)
     } else if (type == 'warning-message-and-cancel') {
       swal({
@@ -1577,7 +1577,7 @@ demo = {
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it',
+        cancelButtonText: 'cancel',
         confirmButtonClass: "btn btn-success",
         cancelButtonClass: "btn btn-danger",
         buttonsStyling: false
