@@ -41,7 +41,7 @@
                 <div class="card card-profile">
                     <div class="card-avatar">
                         <a href="#pablo">
-                            <img class="img" src="{{asset('assets/img/faces/marc.jpg')}}" />
+                            <img class="img" src="{{asset('assets/img/faces/avatar.jpg')}}" />
                         </a>
                     </div>
                     <div class="card-body">

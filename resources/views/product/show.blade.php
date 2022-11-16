@@ -7,10 +7,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3 text-rose">View Record</h1>
-                    <div class="form-group">
-                        <label>id</label>
-                        <p><b>{{$product->id}}</b></p>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label>id</label>--}}
+{{--                        <p><b>{{$product->id}}</b></p>--}}
+{{--                    </div>--}}
                     <div class="form-group">
                         @foreach(config('translatable.locales')::all() as $locale)
                             @php

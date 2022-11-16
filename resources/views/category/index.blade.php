@@ -78,15 +78,13 @@
                                                     $name = 'category';
                                                 @endphp
 
-                                                <a href="{{route('category.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">list</i></a>
+                                                <a href="{{route('category.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
                                                 <a href="{{route('category.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
-{{--                                                <a href="#" class="btn btn-danger btn-round"><i class="material-icons">close</i></a>--}}
-    {{--                                            <a href={{route('category.show', $id )}} class="btn" title="View" data-toggle="tooltip"><i class="fa fa-eye fa-2x" style="color: #323539"></i></a>--}}
-    {{--                                            <a href={{route('category.edit', $id)}} class="btn" title="Edit" data-toggle="tooltip"><i class="material-icons" style="color: #323539">&#xE254;</i></a>--}}
+
+                                                <button class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-confirmation', {{$id}})"><i class="material-icons">close</i></button>
 {{--                                                <button type="button" class="btn btn-danger btn-round" data-bs-toggle="modal" data-bs-target="#modalDelete{{$id, $name}}" title="Delete">--}}
 {{--                                                    <i class="material-icons">close</i>--}}
 {{--                                                </button>--}}
-                                                <button class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-confirmation')"><i class="material-icons">close</i></button>
 {{--                                                @include('deleteConfModal')--}}
                                             </td>
                                         </tr>
@@ -219,6 +217,7 @@
     <script>
         $(document).ready(function() {
             // Initialise Sweet Alert library
+            // demo.showSwal();
             demo.showSwal();
         });
     </script>

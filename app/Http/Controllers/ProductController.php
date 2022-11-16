@@ -20,10 +20,10 @@ class ProductController extends Controller
     {
 
         // get all products with translation
-//        $data = Product::getItemsWithTranslation();
+        $data = Product::getItemsWithTranslation();
 
 //         sort with url parameters without any packages and plugins
-        $data = Product::getItemsByOrdered(\request()->query());
+//        $data = Product::getItemsByOrdered(\request()->query());
 
         // sorting with laravel sortable packages
 //        $data = Product::sortWithLaravelSortable(\request()->query());
@@ -38,11 +38,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = Product::getItemsWithTranslation();
-
+//        $product = Product::getItemsWithTranslation();
+//        dd($product);
         $categories = Category::all();
 
-        return view('product.createOrEdit', compact('product', 'categories'));
+        return view('product.createOrEdit', compact('categories'));
     }
 
     /**

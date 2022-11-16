@@ -40,7 +40,7 @@
                                         $title = $locale['code'].'.title';
                                         $description = $locale['code'].'.description'
                                     @endphp
-                                    <div class="form-group tab-pane @if($locale['code'] == app()->getLocale()) active @endif show" id="fields_{{$locale['code']}}">
+                                    <div class="tab-pane @if($locale['code'] == app()->getLocale()) active @endif show" id="fields_{{$locale['code']}}">
                                         <label for="{{$locale['code']}}[title]" class="bmd-label-floating">Title ({{$locale['code']}})</label>
                                         <input type="text" class="form-control" @if(isset($product)) value="{{$product->$title}}" @endif name="{{$locale['code']}}[title]">
 
@@ -48,7 +48,7 @@
                                         <div class="alert alert-danger">{{$message}}</div>
                                         @enderror
 
-                                        <label for="{{$locale['code']}}[description]" class="bmd-label-floating">Description ({{$locale['code']}})</label>
+                                        <label for="{{$locale['code']}}[description]" class="bmd-label-floating mt-3">Description ({{$locale['code']}})</label>
                                         <textarea class="form-control" name="{{$locale['code']}}[description]">{{(isset($product)) ? $product->$description : ''}}</textarea>
 
                                         @error($description)
@@ -67,10 +67,14 @@
                             @enderror
 
                             <select name="category_id" class="form-control" id="select" >
-                                <option @if(isset($product)) selected value="{{$product->parent['item']}}" @endif>{{$product->parent['title']}}</option>
+                                <option @if(isset($product)) selected value="{{$product->parent['item']}}" @endif>{{$product->parent['title'] ?? ''}}</option>
 
                                 @foreach($categories as $item)
-                                    @if($item->title != $product->parent['title'])
+                                    @if(isset($product))
+                                        @if($item->title != $product->parent['title'])
+                                            <option value={{$item->id}}>{{$item->title}}</option>
+                                        @endif
+                                    @else
                                         <option value={{$item->id}}>{{$item->title}}</option>
                                     @endif
                                 @endforeach

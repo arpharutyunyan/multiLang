@@ -53,7 +53,7 @@
 
                             <label class="text-primary">Parent category</label>
                                 <div class="form-group mt-2">
-                                    <select class="form-control" id="select" name="parent_id" style="--trace-selected-background-color: mediumvioletred">
+                                    <select class="form-control" id="select" name="parent_id">
                                         <option></option>
                                         @if(isset($category->parent['item']))
                                             <option selected value="{{$category->parent['item']}}">{{$category->parent['title']}}</option>

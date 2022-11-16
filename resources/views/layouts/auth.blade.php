@@ -43,28 +43,11 @@
                     <img src="{{asset('assets/img/faces/avatar.jpg')}}" />
                 </div>
                 <div class="user-info">
-                    <a data-toggle="collapse" href="#collapseExample" class="username">
+                    <a href="{{route('user')}}" class="username">
               <span>
                 Tania Andrew
-                <b class="caret"></b>
               </span>
                     </a>
-                    <div class="collapse" id="collapseExample">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('user')}}">
-                                    <span class="sidebar-mini"> MP </span>
-                                    <span class="sidebar-normal"> My Profile </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <span class="sidebar-mini"> RP </span>
-                                    <span class="sidebar-normal"> Reset Password </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <ul class="nav">
@@ -101,7 +84,6 @@
                             <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="javascript:;">Dashboard</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="sr-only">Toggle navigation</span>
@@ -270,12 +252,12 @@
 <!-- Forms Validations Plugin -->
 <script src="{{asset('assets/js/plugins/jquery.validate.min.js')}}"></script>
 <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-{{--<script src="{{asset('assets/js/plugins/jquery.bootstrap-wizard.js')}}"></script>--}}
+<script src="{{asset('assets/js/plugins/jquery.bootstrap-wizard.js')}}"></script>
 <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 {{--<script src="{{asset('assets/js/plugins/bootstrap-selectpicker.js')}}"></script>--}}
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-{{--<script src="{{asset('assets/js/plugins/bootstrap-datetimepicker.min.js')}}"></script>--}}
+<script src="{{asset('assets/js/plugins/bootstrap-datetimepicker.min.js')}}"></script>
 <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
 <script src="{{asset('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
@@ -289,11 +271,11 @@
 <!-- Library for adding dinamically elements -->
 <script src="{{asset('assets/js/plugins/arrive.min.js')}}"></script>
 <!--  Google Maps Plugin    -->
-{{--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>--}}
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!-- Chartist JS -->
-{{--<script src="{{asset('assets/js/plugins/chartist.min.js')}}"></script>--}}
+<script src="{{asset('assets/js/plugins/chartist.min.js')}}"></script>
 <!--  Notifications Plugin    -->
-{{--<script src="{{asset('assets/js/plugins/bootstrap-notify.js')}}"></script>--}}
+<script src="{{asset('assets/js/plugins/bootstrap-notify.js')}}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('assets/js/material-dashboard.js?v=2.2.2')}}" type="text/javascript"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->

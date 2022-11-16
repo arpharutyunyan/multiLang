@@ -1526,7 +1526,7 @@ demo = {
 
   },
 
-  showSwal: function(type) {
+  showSwal: function(type, id) {
     if (type == 'basic') {
       swal({
         title: "Here's a message!",
@@ -1561,15 +1561,26 @@ demo = {
         cancelButtonClass: 'btn btn-danger',
         confirmButtonText: 'Yes, delete it!',
         buttonsStyling: false
-      }).then(function() {
-        swal({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          type: 'success',
-          confirmButtonClass: "btn btn-success",
-          buttonsStyling: false
-        }).catch(swal.noop)
-      }).catch(swal.noop)
+      }).then((result) => {
+          if (result.value){
+              this.form.delete('category/' + id ).then(() => {
+                  swal({
+                      title: 'Deleted!',
+                      text: 'Your file has been deleted.',
+                      type: 'success',
+                      confirmButtonClass: "btn btn-success",
+                      buttonsStyling: false
+                  }).catch(swal.noop)
+              })
+          }
+        // swal({
+        //   title: 'Deleted!',
+        //   text: 'Your file has been deleted.',
+        //   type: 'success',
+        //   confirmButtonClass: "btn btn-success",
+        //   buttonsStyling: false
+        // }).catch(swal.noop)
+      })
     } else if (type == 'warning-message-and-cancel') {
       swal({
         title: 'Are you sure?',
