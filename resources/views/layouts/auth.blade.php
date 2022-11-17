@@ -279,6 +279,8 @@
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('assets/js/material-dashboard.js?v=2.2.2')}}" type="text/javascript"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
+
+{{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
 <script>
     $(document).ready(function() {
         $().ready(function() {

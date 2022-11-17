@@ -77,15 +77,17 @@
                                                     $id = $item->id;
                                                     $name = 'category';
                                                 @endphp
-
+                                            <div class="form-group ">
                                                 <a href="{{route('category.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
                                                 <a href="{{route('category.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
 
-                                                <button class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-confirmation', {{$id}})"><i class="material-icons">close</i></button>
-{{--                                                <button type="button" class="btn btn-danger btn-round" data-bs-toggle="modal" data-bs-target="#modalDelete{{$id, $name}}" title="Delete">--}}
-{{--                                                    <i class="material-icons">close</i>--}}
-{{--                                                </button>--}}
-{{--                                                @include('deleteConfModal')--}}
+                                                <form name="myForm" id="item_{{$id}}" action="{{route($name.'.destroy', $id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-cancel',{{$id}})" value="{{$id}}"><i class="material-icons">close</i></button>
+                                                </form>
+                                            </div>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -103,8 +105,43 @@
         <!-- end row -->
     </div>
 
-
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "INPUT",
+                    searchPlaceholder: "Search records",
+                }
+            });
+
+            var table = $('#datatables').DataTable();
+        });
+    </script>
+
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script>
+        $(document).ready(function() {
+                // Initialise Sweet Alert library
+                demo.showSwal();
+            });
+    </script>
+
+@endpush
+
+
+
+
+
 {{--    <div class="container">--}}
 
 {{--        <div class="table-wrapper">--}}
@@ -189,38 +226,4 @@
 {{--        });--}}
 {{--    </script>--}}
 {{--@endpush--}}
-
-
-@push('script')
-    <script>
-        $(document).ready(function() {
-            $('#datatables').DataTable({
-                "pagingType": "full_numbers",
-                "lengthMenu": [
-                    [5, 10, 25, 50, -1],
-                    [5, 10, 25, 50, "All"]
-                ],
-                responsive: true,
-                language: {
-                    search: "INPUT",
-                    searchPlaceholder: "Search records",
-                }
-            });
-
-            var table = $('#datatables').DataTable();
-
-        });
-    </script>
-
-    <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Initialise Sweet Alert library
-            // demo.showSwal();
-            demo.showSwal();
-        });
-    </script>
-
-@endpush
 
