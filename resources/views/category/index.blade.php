@@ -77,17 +77,13 @@
                                                     $id = $item->id;
                                                     $name = 'category';
                                                 @endphp
-                                            <div class="form-group ">
-                                                <a href="{{route('category.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
-                                                <a href="{{route('category.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
-
                                                 <form name="myForm" id="item_{{$id}}" action="{{route($name.'.destroy', $id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
+                                                    <a href="{{route('category.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
+                                                    <a href="{{route('category.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
                                                     <button type="submit" class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-cancel',{{$id}})" value="{{$id}}"><i class="material-icons">close</i></button>
                                                 </form>
-                                            </div>
-
                                             </td>
                                         </tr>
                                     @endforeach

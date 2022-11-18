@@ -51,19 +51,18 @@
                                         <td>{{$item->title}}</td>
                                         <td>{{$item->description}}</td>
                                         <td>{{$item->price}}</td>
-                                        <td>{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
-                                        <td>{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
+                                        <td data-sort="{{$item->created_at}}">{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
+                                        <td data-sort="{{$item->updated_at}}">{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
                                         <td class="td-actions text-right">
                                             @php
                                                 $id = $item->id;
                                                 $name = 'product';
                                             @endphp
-
-                                            <a href="{{route('product.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
-                                            <a href="{{route('product.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
                                             <form name="myForm" id="item_{{$id}}" action="{{route($name.'.destroy', $id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
+                                                <a href="{{route('product.show', $id )}}" class="btn btn-info btn-round"><i class="material-icons">art_track</i></a>
+                                                <a href="{{route('product.edit', $id)}}" class="btn btn-success btn-round"><i class="material-icons">edit</i></a>
                                                 <button type="submit" class="btn btn-danger btn-round" onclick="demo.showSwal('warning-message-and-cancel',{{$id}})" value="{{$id}}"><i class="material-icons">close</i></button>
                                             </form>
                                         </td>
@@ -84,13 +83,25 @@
     </div>
 @endsection
 
-@push('scripts')
+@push('script')
     <script>
-        $(document).ready(function () {
-            $('#index').DataTable({
-                "lengthMenu": [ [5, 10, 25, 50, -1], [5, 10, 25, 50, "All"] ]
+
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                "pagingType": "full_numbers",
+                "lengthMenu": [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, "All"]
+                ],
+                responsive: true,
+                language: {
+                    search: "INPUT",
+                    searchPlaceholder: "Search records",
+                }
             });
-        });
+
+            var table = $('#datatables').DataTable();
+        })
     </script>
 
     <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support -->

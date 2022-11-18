@@ -21,13 +21,13 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="name" class="bmd-label-floating">Name</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name" value="{{\Illuminate\Support\Facades\Auth::user()['name']}}">
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="email" class="bmd-label-floating">Email address</label>
-                                        <input type="email" class="form-control" name="email">
+                                        <input type="email" class="form-control" name="email" value="{{\Illuminate\Support\Facades\Auth::user()['email']}}">
                                     </div>
                                 </div>
                             </div>
@@ -57,11 +57,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script>
-        $(document).ready(function() {
-            md.checkFullPageBackgroundImage();
-        });
-    </script>
-@endpush
