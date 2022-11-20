@@ -16,5 +16,4 @@ Dashboard
 
 1. after login work <dashboard.blade>
 2. for category and product work blades from same folders
-3. from template, I change </public/assets/js/material-dashboard.js> <showSwal function>
- with type <warning-message-and-cancel> for delete modal
+3. from template, I change </public/assets/js/material-dashboard.js> <showSwal function> with type <warning-message-and-cancel> for delete modal
