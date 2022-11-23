@@ -49,7 +49,7 @@
                                         @enderror
 
                                         <label for="{{$locale['code']}}[description]" class="bmd-label-floating mt-3">Description ({{$locale['code']}})</label>
-                                        <textarea class="form-control" name="{{$locale['code']}}[description]">{{(isset($product)) ? $product->$description : ''}}</textarea>
+                                        <textarea id="{{'language'.$locale['code']}}" class="ckeditor form-control" name="{{$locale['code']}}[description]">{{(isset($product)) ? $product->$description : ''}}</textarea>
 
                                         @error($description)
                                         <div class="alert alert-danger">{{$message}}</div>
@@ -97,3 +97,38 @@
     </div>
 
 @endsection
+
+@push('script')
+    <script>
+        // $(document).ready(function() {
+        //     const id = document.querySelectorAll('[id^="language"]');
+        //
+        //     $.each(id, function (key, value) {
+        //         console.log('key ' + key);
+        //         console.log('value ' + value.textContent);
+        //
+        //     });
+        //
+            ClassicEditor
+                .create(document.querySelector('.ckeditor'), {
+                    removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed"]
+                })
+
+                .catch(error => {
+                    console.error(error);
+                });
+        // })
+{{--        <script type="text/javascript">--}}
+{{--            $(document).ready(function () {--}}
+{{--            $('.ckeditor').ckeditor();--}}
+{{--            --}}
+{{--        });--}}
+{{--    </script>--}}
+
+    </script>
+
+
+
+@endpush
+
+
