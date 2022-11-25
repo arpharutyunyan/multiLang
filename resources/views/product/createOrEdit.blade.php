@@ -108,16 +108,14 @@
             ClassicEditor
                 .create(item[i], {
                     removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed"],
-                    // plugins: [ 'Autoformat' ]
                 })
 
                 .catch(error => {
                     console.error(error);
                 });
         }
+
     </script>
-
-
 
 @endpush
 

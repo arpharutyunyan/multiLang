@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->title}}</td>
-                                        <td>{{strip_tags($item->description)}}</td>
+                                        <td><?=$item->description?></td>
                                         <td>{{$item->price}}</td>
                                         <td data-sort="{{$item->created_at}}">{{$item->created_at->diffForHumans(['parts' => 2])}}</td>
                                         <td data-sort="{{$item->updated_at}}">{{$item->updated_at->diffForHumans(['parts' => 2])}}</td>
