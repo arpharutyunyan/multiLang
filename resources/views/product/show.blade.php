@@ -16,34 +16,48 @@
                         @php
                             $code = app()->getLocale()
                         @endphp
-                        <div class="form-group" >
+
+                        <div class="form-group mt-auto" >
                             <label class="bmd-label-floating">Title ({{$code}})</label>
-                            <p><b class="form-control">{{$product->title}}</b></p>
+                            <p><b class="form-control mt-auto">{{$product['title']}}</b></p>
                         </div>
 
-                        <div class="form-group" >
+                        <div class="form-group mt-auto" >
                             <label>Description ({{$code}})</label>
                             <p><b><?=$product->description?></b></p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-auto">
                             <label class="bmd-label-floating">Parent category</label>
                             <p><b class="form-control">{{$product->parent['title']}}</b></p>
                         </div>
 
-                        <div class="form-group">
-                            <label>Price</label>
-                            <p><b>{{$product->price}}</b></p>
+                        <div class="form-group mt-auto">
+                            <label class="bmd-label-floating">Manufacturer category</label>
+                            <p><b class="form-control">{{$product->manufacturer['title']}}</b></p>
                         </div>
 
-                        <div class="form-group">
-                            <label>Created At</label>
-                            <p><b class="form-control">{{$product->created_at}}</b></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Updated At</label>
-                            <p><b class="form-control">{{$product->updated_at}}</b></p>
-                        </div>
+                        @foreach($details as $item => $value)
+                            @if($item !== 'manufacturer_id' and $item !== 'id' and $value != Null)
+                                <div class="form-group mt-auto" >
+                                    <label class="bmd-label-floating">{{$item}}</label>
+                                    <p><b class="form-control">{{$value}}</b></p>
+                                </div>
+                            @endif
+                        @endforeach
+{{--                        <div class="form-group">--}}
+{{--                            <label>Price</label>--}}
+{{--                            <p><b>{{$product->price}}</b></p>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="form-group">--}}
+{{--                            <label>Created At</label>--}}
+{{--                            <p><b class="form-control">{{$product->created_at}}</b></p>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label>Updated At</label>--}}
+{{--                            <p><b class="form-control">{{$product->updated_at}}</b></p>--}}
+{{--                        </div>--}}
                         <a href="{{route('product.index')}}" class="btn btn-fill btn-rose">Back</a>
                     </div>
                 </div>

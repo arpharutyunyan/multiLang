@@ -77,8 +77,9 @@ class ProductController extends Controller
     {
         // prepare data for viewing all tables in one request
         ProductTranslation::prepareData($product);
-
-        return view('product.show', compact('product'));
+//        $product = $product->getOriginal();
+        $details = $product->getOriginal();
+        return view('product.show', compact('product', 'details'));
     }
 
     /**
@@ -93,7 +94,6 @@ class ProductController extends Controller
 
         $categories = Category::all();
         $manufacturers = Manufacturer::all();
-
         return view('product.createOrEdit', compact(['product', 'categories', 'manufacturers']));
     }
 
