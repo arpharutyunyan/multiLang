@@ -26,6 +26,14 @@ class ProductRequest extends FormRequest
         $rules = [
             'price' => 'required|integer',
             'category_id' => 'required',
+            'screen_size',
+            'ram',
+            'memory',
+            'main_camera',
+            'front_camera',
+            'battery_capacity',
+            'os',
+            'manufacturer_id' => 'required'
         ];
 
         // adding in rules translatable attributes with language code like 'en.title'

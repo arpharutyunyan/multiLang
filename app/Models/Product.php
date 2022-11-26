@@ -16,7 +16,15 @@ class Product extends Model implements TranslatableContract
     use HasFactory, Translatable, Sortable;
 
     public $fillable = [
-        'price'
+        'price',
+        'screen_size',
+        'ram',
+        'memory',
+        'main_camera',
+        'front_camera',
+        'battery_capacity',
+        'os',
+        'manufacturer_id'
     ];
 
     // for sorting datatable
