@@ -54,6 +54,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        dd($request);
         $item = Product::create($request->input());
 
         // fill in productCategory table

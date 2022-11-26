@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
 
-        <form class="ml-auto mr-auto" action="{{isset($product) ? route('product.update', $product) : route('product.store')}}" method="POST">
+        <form action="{{isset($product) ? route('product.update', $product) : route('product.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
             @if(isset($product))
@@ -64,7 +64,6 @@
                         </div>
                     </div>
                     <div class="mt-auto ml-auto mr-auto">
-
                         <div class="card ">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
@@ -117,107 +116,110 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <div class="col-md-6 ">
-                    <div class="card ">
-                        <div class="card-header card-header-rose card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons">details</i>
-                            </div>
-                            <h4 class="card-title">Details</h4>
-                        </div>
-                        <div class="card-body ">
-
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Price</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="price" @if(isset($product)) value="{{$product->price}}" @endif>
-                                    </div>
-                                    @error('price')
-                                    <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
+                <div class="col">
+                    <div class="mt-auto ml-auto mr-auto ">
+                        <div class="card ">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">details</i>
                                 </div>
+                                <h4 class="card-title">Details</h4>
                             </div>
+                            <div class="card-body ">
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Screen size</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="screen_size" @if(isset($product)) value="{{$product->screen_size}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Price</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="price" @if(isset($product)) value="{{$product->price}}" @endif>
+                                        </div>
+                                        @error('price')
+                                        <div class="alert alert-danger">{{$message}}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>inch</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">RAM</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="ram" @if(isset($product)) value="{{$product->ram}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Screen size</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="screen_size" @if(isset($product)) value="{{$product->screen_size}}" @endif>
+                                        </div>
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>inch</code>
+                                    </label>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>GB</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Memory</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="memory" @if(isset($product)) value="{{$product->memory}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">RAM</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="ram" @if(isset($product)) value="{{$product->ram}}" @endif>
+                                        </div>
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>GB</code>
+                                    </label>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>GB</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Main camera</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="main_camera" @if(isset($product)) value="{{$product->main_camera}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Memory</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="memory" @if(isset($product)) value="{{$product->memory}}" @endif>
+                                        </div>
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>GB</code>
+                                    </label>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>MP</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Front camera</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="front_camera" @if(isset($product)) value="{{$product->front_camera}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Main camera</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="main_camera" @if(isset($product)) value="{{$product->main_camera}}" @endif>
+                                        </div>
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>MP</code>
+                                    </label>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>MP</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Battery capacity</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" name="battery_capacity" @if(isset($product)) value="{{$product->battery_capacity}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Front camera</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="front_camera" @if(isset($product)) value="{{$product->front_camera}}" @endif>
+                                        </div>
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>MP</code>
+                                    </label>
                                 </div>
-                                <label class="col-sm-3 label-on-right">
-                                    <code>mAh</code>
-                                </label>
-                            </div>
 
-                            <div class="row">
-                                <label class="col-sm-2 col-form-label">Operating system</label>
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" name="os" @if(isset($product)) value="{{$product->os}}" @endif>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Battery capacity</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="battery_capacity" @if(isset($product)) value="{{$product->battery_capacity}}" @endif>
+                                        </div>
+                                    </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>mAh</code>
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Operating system</label>
+                                    <div class="col-sm-7">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="os" @if(isset($product)) value="{{$product->os}}" @endif>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -226,16 +228,48 @@
                 </div>
             </div>
 
+            <div class="col">
+                <div class="mt-auto ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">image</i>
+                            </div>
+                            <h4 class="card-title">Images</h4>
 
-            <div class="row justify-content-end">
-                <div class="col-auto col-sm-auto">
-                    <a href="{{route('product.index')}}" class="btn" style="border-color: black">Cancel</a>
+                        </div>
+                        <div class="card-body ">
+
+                            @for($i=0; $i<5; ++$i)
+                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput" id="image">
+                                    <div class="fileinput-new thumbnail">
+                                        <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
+                                    </div>
+                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                    <div>
+                                          <span class="btn btn-rose btn-round btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="image[]" multiple>
+                                          </span>
+                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
+                <div class="row justify-content-end">
+                    <div class="col-auto col-sm-auto">
+                        <a href="{{route('product.index')}}" class="btn" style="border-color: black">Cancel</a>
+                    </div>
 
-                <div class="col-auto col-sm-auto">
-                    <input type="submit" class="btn btn-fill btn-rose col-auto" value="Submit">
+                    <div class="col-auto col-sm-auto">
+                        <input type="submit" class="btn btn-fill btn-rose col-auto" value="Submit">
+                    </div>
                 </div>
             </div>
+
 
         </form>
 
