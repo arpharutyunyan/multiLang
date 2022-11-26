@@ -23,7 +23,7 @@
 
                         <div class="form-group" >
                             <label>Description ({{$code}})</label>
-                            <p><b>{{$product->description}}</b></p>
+                            <p><b><?=$product->description?></b></p>
                         </div>
 
                         <div class="form-group">
@@ -44,7 +44,7 @@
                             <label>Updated At</label>
                             <p><b class="form-control">{{$product->updated_at}}</b></p>
                         </div>
-                        <a href="{{route('category.index')}}" class="btn btn-fill btn-rose">Back</a>
+                        <a href="{{route('product.index')}}" class="btn btn-fill btn-rose">Back</a>
                     </div>
                 </div>
             </div>

@@ -44,6 +44,10 @@ class Product extends Model implements TranslatableContract
         return $this->hasOne(ProductTranslation::class, 'item');
     }
 
+    public function manufacturer(){
+        return $this->hasOne(Manufacturer::class);
+    }
+
     // return array of all products with translatable fields
     public static function getItemsWithTranslation(){
 

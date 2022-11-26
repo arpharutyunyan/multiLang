@@ -13,4 +13,8 @@ class Manufacturer extends Model
         'title'
     ];
 
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
+
 }

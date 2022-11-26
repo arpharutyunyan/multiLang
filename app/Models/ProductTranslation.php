@@ -85,9 +85,13 @@ class ProductTranslation extends Model
             ->where('locale', app()->getLocale())
             ->first();
 
+        $manufacturer = Manufacturer::where('id', $item->manufacturer_id)
+            ->first();
+
         // set category in the request array
-        if ($parent){
+        if ($parent and $manufacturer){
             $item['parent'] = $parent;
+            $item['manufacturer'] = $manufacturer;
         }
 
     }

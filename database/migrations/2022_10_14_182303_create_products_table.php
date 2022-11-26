@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->float('price');
-            $table->float('screen_size');
-            $table->integer('ram');
-            $table->integer('memory');
-            $table->integer('main_camera');
-            $table->float('front_camera');
-            $table->integer('battery_capacity');
-            $table->string('os');
+            $table->float('screen_size')->nullable();
+            $table->integer('ram')->nullable();
+            $table->integer('memory')->nullable();
+            $table->integer('main_camera')->nullable();
+            $table->float('front_camera')->nullable();
+            $table->integer('battery_capacity')->nullable();
+            $table->string('os')->nullable();
             $table->timestamps();
         });
     }

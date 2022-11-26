@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
+use App\Models\Manufacturer;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTranslation;
@@ -41,8 +42,8 @@ class ProductController extends Controller
 //        $product = Product::getItemsWithTranslation();
 //        dd($product);
         $categories = Category::all();
-
-        return view('product.createOrEdit', compact('categories'));
+        $manufacturers = Manufacturer::all();
+        return view('product.createOrEdit', compact('categories', 'manufacturers'));
     }
 
     /**
@@ -53,7 +54,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $item = Product::create($request->validated());
+        $item = Product::create($request->input());
 
         // fill in productCategory table
         ProductCategory::updateOrCreate(
@@ -91,8 +92,9 @@ class ProductController extends Controller
         ProductTranslation::prepareData($product);
 
         $categories = Category::all();
+        $manufacturers = Manufacturer::all();
 
-        return view('product.createOrEdit', compact('product', 'categories'));
+        return view('product.createOrEdit', compact(['product', 'categories', 'manufacturers']));
     }
 
     /**
@@ -107,8 +109,9 @@ class ProductController extends Controller
         ProductTranslation::createOrUpdate($request->validated(), $product->id);
 
         // update product table
-        $product->price = $request->price;
-        $product->save();
+//        $product->price = $request->price;
+//        $product->save();
+        $product->update($request->input());
 
         // update productCategory table
         ProductCategory::updateOrCreate(

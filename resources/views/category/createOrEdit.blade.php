@@ -70,8 +70,8 @@
 
                             </select>
                             <div class="card-footer ">
-                                <input type="submit" class="btn btn-fill btn-rose col-auto mt-5" value="Submit">
                                 <a href="{{route('category.index')}}" class="btn mt-5" style="border-color: black">Cancel</a>
+                                <input type="submit" class="btn btn-fill btn-rose col-auto mt-5" value="Submit">
                             </div>
                         </div>
                     </div>
