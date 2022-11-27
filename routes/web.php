@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::put('/user', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'update'])->name('user.update');
 
+//    Route::get('storage/{id}/{index}', [\App\Http\Controllers\ProductController::class, 'getImages'])->name('storage');
+
 
 });
 

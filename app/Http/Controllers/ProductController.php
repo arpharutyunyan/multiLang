@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTranslation;
 use Illuminate\Http\Request;
+use function Termwind\renderUsing;
 
 class ProductController extends Controller
 {
@@ -54,7 +55,8 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        dd($request);
+//        dd($request);
+
         $item = Product::create($request->input());
 
         // fill in productCategory table
@@ -64,6 +66,7 @@ class ProductController extends Controller
         );
 
         ProductTranslation::createOrUpdate($request->validated(), $item->id);
+        $this->imageUpload($request, $item->id);
 
         return redirect()->route('product.index');
     }
@@ -80,7 +83,8 @@ class ProductController extends Controller
         ProductTranslation::prepareData($product);
 //        $product = $product->getOriginal();
         $details = $product->getOriginal();
-        return view('product.show', compact('product', 'details'));
+        $files = $this->getImages($product->id);
+        return view('product.show', compact('product', 'details', 'files'));
     }
 
     /**
@@ -95,7 +99,9 @@ class ProductController extends Controller
 
         $categories = Category::all();
         $manufacturers = Manufacturer::all();
-        return view('product.createOrEdit', compact(['product', 'categories', 'manufacturers']));
+        $files = $this->getImages($product->id);
+
+        return view('product.createOrEdit', compact(['product', 'categories', 'manufacturers', 'files']));
     }
 
     /**
@@ -120,6 +126,7 @@ class ProductController extends Controller
             ['category_id' => $request['category_id']]
         );
 
+        $this->imageUpload($request, $product->id);
         return redirect()->route('product.index');
     }
 
@@ -131,8 +138,58 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->deleteImageDir($product->id);
         $product->delete();
 
+
         return redirect()->route('product.index');
+    }
+
+    public function imageUpload($request, $id){
+
+        if ($request->hasFile('image')){
+            $this->deleteImageDir($id);
+
+            if (!file_exists('../storage/app/uploads/'.$id)) {
+                mkdir('../storage/app/uploads/'.$id);
+            }
+
+            $images = $request->file('image');
+            for ($i=0; $i<count($images); ++$i){
+                $filename = 'image'.$i.'.'.$images[$i]->getClientOriginalExtension();
+                $path = ($request->image)[$i]->storeAs($id, $filename);
+            }
+
+        }
+    }
+
+    public function deleteImageDir($id){
+        $folder = '../storage/app/uploads/'.$id;
+        if (file_exists($folder)) {
+
+            $files = glob($folder . '/*');
+
+            // Loop through the file list
+            foreach($files as $file) {
+
+                // Check for file
+                if(is_file($file)) {
+
+                    // Use unlink function to delete the file.
+                    unlink($file);
+                }
+            }
+            rmdir($folder);
+        }
+    }
+
+    public function getImages($id, ){
+        $folder = '../storage/app/uploads/'.$id;
+        $files = glob($folder . '/*');
+
+//        if ($index < count($files)){
+//            return $files[$index];
+//        }
+        return $files;
     }
 }

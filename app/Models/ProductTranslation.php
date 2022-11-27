@@ -57,7 +57,7 @@ class ProductTranslation extends Model
     }
 
     //get category as params and add translated key
-    public static function prepareData($item){
+    public static function prepareData(&$item){
 
         // take all language code from config, with query, because variable takes model class name
         $locales = config('translatable.locales')::all();

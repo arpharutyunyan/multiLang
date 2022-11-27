@@ -238,10 +238,10 @@
                             <h4 class="card-title">Images</h4>
 
                         </div>
-                        <div class="card-body ">
+                        <div class="card-body mt-auto ml-auto mr-auto">
 
                             @for($i=0; $i<5; ++$i)
-                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput" id="image">
+                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail">
                                         <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
                                     </div>
@@ -250,7 +250,7 @@
                                           <span class="btn btn-rose btn-round btn-file">
                                             <span class="fileinput-new">Select image</span>
                                             <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="image[]" multiple>
+                                            <input type="file" name="image[]" class="file">
                                           </span>
                                         <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                     </div>
@@ -293,6 +293,22 @@
                     console.error(error);
                 });
         }
+
+        {{--$('.file').ijaboCropTool({--}}
+        {{--    preview : '.image-previewer',--}}
+        {{--    setRatio:1,--}}
+        {{--    allowedExtensions: ['jpg', 'jpeg','png'],--}}
+        {{--    buttonsText:['CROP','QUIT'],--}}
+        {{--    buttonsColor:['#30bf7d','#ee5155', -15],--}}
+        {{--    --}}{{--processUrl:'{{ route("crop") }}',--}}
+        {{--    withCSRF:['_token','{{ csrf_token() }}'],--}}
+        {{--    onSuccess:function(message, element, status){--}}
+        {{--        alert(message);--}}
+        {{--    },--}}
+        {{--    onError:function(message, element, status){--}}
+        {{--        alert(message);--}}
+        {{--    }--}}
+        {{--});--}}
 
     </script>
 
