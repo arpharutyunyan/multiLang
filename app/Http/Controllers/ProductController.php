@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductTranslation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use function Termwind\renderUsing;
 
 class ProductController extends Controller
@@ -23,7 +24,6 @@ class ProductController extends Controller
 
         // get all products with translation
         $data = Product::getItemsWithTranslation();
-
 //         sort with url parameters without any packages and plugins
 //        $data = Product::getItemsByOrdered(\request()->query());
 
@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function create()
     {
 //        $product = Product::getItemsWithTranslation();
-//        dd($product);
+
         $categories = Category::all();
         $manufacturers = Manufacturer::all();
         return view('product.createOrEdit', compact('categories', 'manufacturers'));
@@ -55,8 +55,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-//        dd($request);
-
         $item = Product::create($request->input());
 
         // fill in productCategory table
@@ -81,7 +79,6 @@ class ProductController extends Controller
     {
         // prepare data for viewing all tables in one request
         ProductTranslation::prepareData($product);
-//        $product = $product->getOriginal();
         $details = $product->getOriginal();
         $files = $this->getImages($product->id);
         return view('product.show', compact('product', 'details', 'files'));
@@ -150,10 +147,6 @@ class ProductController extends Controller
         if ($request->hasFile('image')){
             $this->deleteImageDir($id);
 
-            if (!file_exists('../storage/app/uploads/'.$id)) {
-                mkdir('../storage/app/uploads/'.$id);
-            }
-
             $images = $request->file('image');
             for ($i=0; $i<count($images); ++$i){
                 $filename = 'image'.$i.'.'.$images[$i]->getClientOriginalExtension();
@@ -164,32 +157,15 @@ class ProductController extends Controller
     }
 
     public function deleteImageDir($id){
-        $folder = '../storage/app/uploads/'.$id;
-        if (file_exists($folder)) {
+        if (Storage::disk('public')->exists($id)) {
 
-            $files = glob($folder . '/*');
-
-            // Loop through the file list
-            foreach($files as $file) {
-
-                // Check for file
-                if(is_file($file)) {
-
-                    // Use unlink function to delete the file.
-                    unlink($file);
-                }
-            }
-            rmdir($folder);
+            Storage::deleteDirectory($id);
         }
     }
 
-    public function getImages($id, ){
-        $folder = '../storage/app/uploads/'.$id;
-        $files = glob($folder . '/*');
+    public function getImages($id){
 
-//        if ($index < count($files)){
-//            return $files[$index];
-//        }
+        $files = Storage::disk('public')->allFiles($id);
         return $files;
     }
 }

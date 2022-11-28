@@ -32,13 +32,13 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app/uploads'),
+            'root' => storage_path('app/public/products/'),
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/uploads'),
-//            'root' => public_path(),
+            'root' => storage_path('app/public/products/'),
+//            'root' => public_path('uploads/'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
@@ -68,7 +68,8 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/uploads'),
+        public_path('storage') => storage_path('app/public'),
+//        public_path('storage') => storage_path('app/uploads'),
     ],
 
 ];

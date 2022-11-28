@@ -243,7 +243,9 @@
                             @for($i=0; $i<5; ++$i)
                                 <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput">
                                     <div class="fileinput-new thumbnail">
-                                        <img src="{{asset('assets/img/image_placeholder.jpg')}}" alt="...">
+{{--                                        {{storage_pu('uploads')}}--}}
+{{--                                        {{asset($files[0])}}--}}
+                                        <img src="@if(isset($product) and isset($files) and $i < count($files)) {{asset('storage/products/'.$files[$i])}} @else {{asset('assets/img/image_placeholder.jpg')}} @endif" alt="...">
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                     <div>

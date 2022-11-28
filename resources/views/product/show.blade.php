@@ -3,64 +3,101 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 ml-auto mr-auto">
-
-                <div class="card">
-                    <div class="card-header card-header-rose card-header-icon">
-                        <div class="card-icon">
-                            <i class="material-icons">list</i>
+            <div class="col">
+                <div class="mt-auto ml-auto mr-auto ">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">list</i>
+                            </div>
+                            <h4 class="card-title">View Record</h4>
                         </div>
-                        <h4 class="card-title">View Record</h4>
-                    </div>
-                    <div class="card-body ">
-                        @php
-                            $code = app()->getLocale()
-                        @endphp
+                        <div class="card-body ">
+                            @php
+                                $code = app()->getLocale()
+                            @endphp
 
-                        <div class="form-group mt-auto" >
-                            <label class="bmd-label-floating">Title ({{$code}})</label>
-                            <p><b class="form-control mt-auto">{{$product['title']}}</b></p>
+                            <div class="form-group mt-2" >
+                                <label class="bmd-label-floating mt-2">Title ({{$code}})</label>
+                                <b class="form-control mt-auto">{{$product['title']}}</b>
+                            </div>
+
+                            <div class="form-group mt-2" >
+                                <label class="bmd-label-floating mt-2">Description ({{$code}})</label>
+                                <b class="form-control mt-auto"><?=$product->description?></b>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label class="bmd-label-floating">Parent category</label>
+                                <b class="form-control">{{$product->parent['title']}}</b>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label class="bmd-label-floating">Manufacturer category</label>
+                                <b class="form-control">{{$product->manufacturer['title']}}</b>
+                            </div>
+
                         </div>
-
-                        <div class="form-group mt-auto" >
-                            <label>Description ({{$code}})</label>
-                            <p><b><?=$product->description?></b></p>
-                        </div>
-
-                        <div class="form-group mt-auto">
-                            <label class="bmd-label-floating">Parent category</label>
-                            <p><b class="form-control">{{$product->parent['title']}}</b></p>
-                        </div>
-
-                        <div class="form-group mt-auto">
-                            <label class="bmd-label-floating">Manufacturer category</label>
-                            <p><b class="form-control">{{$product->manufacturer['title']}}</b></p>
-                        </div>
-
-                        @foreach($details as $item => $value)
-                            @if($item !== 'manufacturer_id' and $item !== 'id' and $value != Null)
-                                <div class="form-group mt-auto" >
-                                    <label class="bmd-label-floating">{{$item}}</label>
-                                    <p><b class="form-control">{{$value}}</b></p>
-                                </div>
-                            @endif
-                        @endforeach
-{{--                        <div class="form-group">--}}
-{{--                            <label>Price</label>--}}
-{{--                            <p><b>{{$product->price}}</b></p>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="form-group">--}}
-{{--                            <label>Created At</label>--}}
-{{--                            <p><b class="form-control">{{$product->created_at}}</b></p>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label>Updated At</label>--}}
-{{--                            <p><b class="form-control">{{$product->updated_at}}</b></p>--}}
-{{--                        </div>--}}
-                        <a href="{{route('product.index')}}" class="btn btn-fill btn-rose">Back</a>
                     </div>
                 </div>
+
+                <div class="mt-auto ml-auto mr-auto ">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">details</i>
+                            </div>
+                            <h4 class="card-title">Details</h4>
+                        </div>
+
+                        <div class="card-body ">
+                            @foreach($details as $item => $value)
+                                @if($item !== 'manufacturer_id' and $item !== 'id' and $value != Null)
+                                    <div class="row">
+                                        <label class="col-sm-2 col-form-label">{{$item}}</label>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <b class="form-control">{{$value}}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="mt-auto ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">image</i>
+                            </div>
+                            <h4 class="card-title">Images</h4>
+
+                        </div>
+                        <div class="card-body mt-auto ml-auto mr-auto">
+                            @if(count($files) === 0)
+                                <strong>No images</strong>
+                            @endif
+                            @for($i=0; $i < count($files); ++$i)
+                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img src="@if(isset($product)) {{asset('storage/products/'.$files[$i])}} @endif " alt="...">
+                                        </div>
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-end">
+            <div class="col-auto col-sm-auto">
+                <a href="{{route('product.index')}}" class="btn btn-fill btn-rose">Back</a>
             </div>
         </div>
     </div>
