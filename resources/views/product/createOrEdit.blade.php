@@ -27,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="mt-auto ml-auto mr-auto ">
+                    <div class="mt-auto ml-auto mr-auto">
                         <div class="card">
                             <div class="card-header card-header-rose card-header-icon">
                                 <div class="card-icon">
@@ -238,27 +238,37 @@
                             <h4 class="card-title">Images</h4>
 
                         </div>
-                        <div class="card-body mt-auto ml-auto mr-auto">
 
-                            @for($i=0; $i<5; ++$i)
-                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput">
-                                    <div class="fileinput-new thumbnail">
+
+                        {{--                        @php--}}
+{{--                            $i = 0;--}}
+{{--                        @endphp--}}
+
+
+
+
+{{--                        <div class="card-body mt-auto ml-auto mr-auto">--}}
+
+
+{{--                            @for($i=0; $i<5; ++$i)--}}
+{{--                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput">--}}
+{{--                                    <div class="fileinput-new thumbnail">--}}
 {{--                                        {{storage_pu('uploads')}}--}}
 {{--                                        {{asset($files[0])}}--}}
-                                        <img src="@if(isset($product) and isset($files) and $i < count($files)) {{asset('storage/products/'.$files[$i])}} @else {{asset('assets/img/image_placeholder.jpg')}} @endif" alt="...">
-                                    </div>
-                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                    <div>
-                                          <span class="btn btn-rose btn-round btn-file">
-                                            <span class="fileinput-new">Select image</span>
-                                            <span class="fileinput-exists">Change</span>
-                                            <input type="file" name="image[]" class="file">
-                                          </span>
-                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                    </div>
-                                </div>
-                            @endfor
-                        </div>
+{{--                                        <img src="@if(isset($product) and isset($files) and $i < count($files)) {{asset('storage/products/'.$files[$i])}} @else {{asset('assets/img/image_placeholder.jpg')}} @endif" alt="...">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>--}}
+{{--                                    <div>--}}
+{{--                                          <span class="btn btn-rose btn-round btn-file">--}}
+{{--                                            <span class="fileinput-new">Select image</span>--}}
+{{--                                            <span class="fileinput-exists">Change</span>--}}
+{{--                                            <input type="file" name="image[]" class="file">--}}
+{{--                                          </span>--}}
+{{--                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            @endfor--}}
+{{--                        </div>--}}
                     </div>
                 </div>
                 <div class="row justify-content-end">
@@ -274,6 +284,13 @@
 
 
         </form>
+        <form action="{{route('upload')}}" class="dropzone" id="my-great-dropzone">@csrf</form>
+{{--        <div class="card-body mt-auto ml-auto mr-auto">--}}
+{{--            <form action="{{route('upload')}}" method="post" class="dropzone" enctype="multipart/form-data">--}}
+{{--                @csrf--}}
+{{--            </form>--}}
+{{--            --}}{{--                            <input type="file" name="image[]" class="file">--}}
+{{--        </div>--}}
 
     </div>
 
@@ -313,6 +330,8 @@
         {{--});--}}
 
     </script>
+
+{{--   -------}}
 
 @endpush
 

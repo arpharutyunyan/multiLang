@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function (){
 
     Route::resource('category', \App\Http\Controllers\CategoryController::class);
     Route::resource('product', \App\Http\Controllers\ProductController::class);
+    Route::post('/image_upload', [\App\Http\Controllers\ProductController::class, 'imageUpload'])->name('upload');
 
     Route::get('/dashboard', function () {
         return view('admin.dashboard');

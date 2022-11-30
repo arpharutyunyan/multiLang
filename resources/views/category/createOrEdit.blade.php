@@ -69,9 +69,15 @@
                                 @endforeach
 
                             </select>
-                            <div class="card-footer ">
-                                <a href="{{route('category.index')}}" class="btn mt-5" style="border-color: black">Cancel</a>
-                                <input type="submit" class="btn btn-fill btn-rose col-auto mt-5" value="Submit">
+
+                            <div class="row justify-content-end">
+                                <div class="col-auto col-sm-auto">
+                                    <a href="{{route('category.index')}}" class="btn mt-5" style="border-color: black">Cancel</a>
+                                </div>
+
+                                <div class="col-auto col-sm-auto">
+                                    <input type="submit" class="btn btn-fill btn-rose col-auto mt-5" value="Submit">
+                                </div>
                             </div>
                         </div>
                     </div>

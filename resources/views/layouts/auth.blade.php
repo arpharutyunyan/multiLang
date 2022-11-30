@@ -20,7 +20,7 @@
     <!--Select-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
     <!--image zoom-->
-    <link rel="stylesheet" href="{{asset('ijaboCropTool/ijaboCropTool.min.css')}}">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 </head>
 
 <body class="">
@@ -284,7 +284,7 @@
 <!--ckeditor-->
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 <!--image zoom-->
-<script src="{{asset('ijaboCropTool/ijaboCropTool.min.js')}}"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 

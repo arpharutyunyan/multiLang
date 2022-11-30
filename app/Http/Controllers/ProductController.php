@@ -24,6 +24,7 @@ class ProductController extends Controller
 
         // get all products with translation
         $data = Product::getItemsWithTranslation();
+//        $this->saveImages(34);
 //         sort with url parameters without any packages and plugins
 //        $data = Product::getItemsByOrdered(\request()->query());
 
@@ -64,8 +65,8 @@ class ProductController extends Controller
         );
 
         ProductTranslation::createOrUpdate($request->validated(), $item->id);
-        $this->imageUpload($request, $item->id);
-
+//        $this->imageUpload($request, $item->id);
+            $this->saveImages($item->id);
         return redirect()->route('product.index');
     }
 
@@ -123,7 +124,7 @@ class ProductController extends Controller
             ['category_id' => $request['category_id']]
         );
 
-        $this->imageUpload($request, $product->id);
+//        $this->imageUpload($request, $product->id);
         return redirect()->route('product.index');
     }
 
@@ -142,18 +143,55 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function imageUpload($request, $id){
+//    public function imageUpload($request, $id){
+    public function imageUpload(Request $request){
 
-        if ($request->hasFile('image')){
-            $this->deleteImageDir($id);
+//        if ($request->hasFile('image')){
+//            $this->deleteImageDir($id);
+//
+//            $images = $request->file('image');
+//            for ($i=0; $i<count($images); ++$i){
+//                $filename = 'image'.$i.'.'.$images[$i]->getClientOriginalExtension();
+//                $path = ($request->image)[$i]->storeAs($id, $filename);
+//            }
+//
+//        }
+//        dd($request);
+        if ($request->hasFile('file')){
 
-            $images = $request->file('image');
-            for ($i=0; $i<count($images); ++$i){
-                $filename = 'image'.$i.'.'.$images[$i]->getClientOriginalExtension();
-                $path = ($request->image)[$i]->storeAs($id, $filename);
-            }
+            $images = $request->file('file');
+//            dd($request->file('image'));
+//            for ($i=0; $i<count($images); ++$i){
+//                $filename = 'image'.$images[$i]->getClientOriginalExtension();
+            $filename = $images->getClientOriginalName();
+//            if (!$path){
+//                $path = 'temp';
+//            }
+
+            $images->storeAs('temp', $filename);
+//            $images->storeAs('temp', $filename);
+//            $images->move(storage_path('/images'), $filename);
+//            }
 
         }
+    }
+
+    public function saveImages($id){
+//        if ($request->hasFile('image')){
+
+            $this->deleteImageDir($id);
+            $images = $this->getImages('temp');
+//            dd(public_path());
+//            $images = $request->file('image');
+            for ($i=0; $i<count($images); ++$i){
+                $filename = 'image'.$i.'.'.explode('.', $images[$i], 2)[1];
+//                $path = ($request->image)[$i]->storeAs($id, $filename);
+                Storage::move($images[$i], $id.'/'.$filename);
+            }
+
+        $this->deleteImageDir('temp');
+////
+//        }
     }
 
     public function deleteImageDir($id){
