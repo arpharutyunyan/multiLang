@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-fluid">
 
-        <form action="{{isset($product) ? route('product.update', $product) : route('product.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{isset($product) ? route('product.update', $product) : route('product.store')}}" method="POST" enctype="multipart/form-data" id="main_form">
             @csrf
 
             @if(isset($product))
@@ -227,7 +227,9 @@
                     </div>
                 </div>
             </div>
+        </form>
 
+        <div class="col">
             <div class="col">
                 <div class="mt-auto ml-auto mr-auto">
                     <div class="card">
@@ -239,58 +241,29 @@
 
                         </div>
 
-
-                        {{--                        @php--}}
-{{--                            $i = 0;--}}
-{{--                        @endphp--}}
-
-
-
-
-{{--                        <div class="card-body mt-auto ml-auto mr-auto">--}}
-
-
-{{--                            @for($i=0; $i<5; ++$i)--}}
-{{--                                <div class="fileinput fileinput-new text-center mt-auto ml-3 mr-3" data-provides="fileinput">--}}
-{{--                                    <div class="fileinput-new thumbnail">--}}
-{{--                                        {{storage_pu('uploads')}}--}}
-{{--                                        {{asset($files[0])}}--}}
-{{--                                        <img src="@if(isset($product) and isset($files) and $i < count($files)) {{asset('storage/products/'.$files[$i])}} @else {{asset('assets/img/image_placeholder.jpg')}} @endif" alt="...">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="fileinput-preview fileinput-exists thumbnail"></div>--}}
-{{--                                    <div>--}}
-{{--                                          <span class="btn btn-rose btn-round btn-file">--}}
-{{--                                            <span class="fileinput-new">Select image</span>--}}
-{{--                                            <span class="fileinput-exists">Change</span>--}}
-{{--                                            <input type="file" name="image[]" class="file">--}}
-{{--                                          </span>--}}
-{{--                                        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            @endfor--}}
-{{--                        </div>--}}
-                    </div>
-                </div>
-                <div class="row justify-content-end">
-                    <div class="col-auto col-sm-auto">
-                        <a href="{{route('product.index')}}" class="btn" style="border-color: black">Cancel</a>
-                    </div>
-
-                    <div class="col-auto col-sm-auto">
-                        <input type="submit" class="btn btn-fill btn-rose col-auto" value="Submit">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col mt-auto ml-auto mr-auto">
+                                    <form action="{{route('upload')}}" class="dropzone" id="my-great-dropzone">
+                                        @csrf
+                                    </form>
+                                <div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-end">
+                <div class="col-auto col-sm-auto">
+                    <a href="{{route('product.index')}}" class="btn" style="border-color: black">Cancel</a>
+                </div>
 
+                <div class="col-auto col-sm-auto">
+                    <input type="submit" class="btn btn-fill btn-rose col-auto" value="Submit" id="submit">
+                </div>
+            </div>
 
-        </form>
-        <form action="{{route('upload')}}" class="dropzone" id="my-great-dropzone">@csrf</form>
-{{--        <div class="card-body mt-auto ml-auto mr-auto">--}}
-{{--            <form action="{{route('upload')}}" method="post" class="dropzone" enctype="multipart/form-data">--}}
-{{--                @csrf--}}
-{{--            </form>--}}
-{{--            --}}{{--                            <input type="file" name="image[]" class="file">--}}
-{{--        </div>--}}
+        </div>
 
     </div>
 
@@ -299,39 +272,72 @@
 @push('script')
     <script>
 
-        let item = document.querySelectorAll('[id^="language"]');
-        console.log(item);
+        $(document).ready(function() {
+            $("#submit").click(function() {
+                $("#main_form").submit();
+            });
 
-        for (let i=0; i<item.length; ++i){
-            ClassicEditor
-                .create(item[i], {
-                    removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed"],
+            let item = document.querySelectorAll('[id^="language"]');
+            console.log(item);
+
+            for (let i=0; i<item.length; ++i){
+                ClassicEditor
+                    .create(item[i], {
+                        removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed"],
+                    })
+
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+
+        Dropzone.autoDiscover = false;
+        $('.dropzone').dropzone({
+            maxFilesize: 5, //set file upload size
+            acceptedFiles: ".jpeg,.jpg,.png,.gif", // accepted files format
+            addRemoveLinks: true,
+            init: function () {
+                let thisDropzone = this;
+                $.ajax({
+                    method: 'get',
+                    @if(isset($product))
+                        url: '/getImages/' + {{$product->id}},
+                    @else
+                    url: '/getImages/' + 'temp',
+                    @endif
+
+                    success: function (data){
+
+                        $.each(data, function (key, value){
+                            let mockFile = {name: value.name, size: value.size};
+                            let callback = null; // Optional callback when it's done
+                            let crossOrigin = null; // Added to the `img` tag for crossOrigin handling
+                            let resizeThumbnail = true; // Tells Dropzone whether it should resize the image first
+
+                            thisDropzone.displayExistingFile(mockFile, value.path, callback, crossOrigin, resizeThumbnail);
+
+                        })
+                    }
                 })
+            },
 
-                .catch(error => {
-                    console.error(error);
+            removedfile: function(file) {
+                var fileName = file.name;
+                console.log(fileName);
+                $.ajax({
+                    type: 'POST',
+                    url: '/image_delete',
+                    data: {name: fileName, request: 'remove', "_token": "{{ csrf_token() }}"},
+                    sucess: function(data){
+                        console.log('success: ' + data);
+                    }
                 });
-        }
-
-        {{--$('.file').ijaboCropTool({--}}
-        {{--    preview : '.image-previewer',--}}
-        {{--    setRatio:1,--}}
-        {{--    allowedExtensions: ['jpg', 'jpeg','png'],--}}
-        {{--    buttonsText:['CROP','QUIT'],--}}
-        {{--    buttonsColor:['#30bf7d','#ee5155', -15],--}}
-        {{--    --}}{{--processUrl:'{{ route("crop") }}',--}}
-        {{--    withCSRF:['_token','{{ csrf_token() }}'],--}}
-        {{--    onSuccess:function(message, element, status){--}}
-        {{--        alert(message);--}}
-        {{--    },--}}
-        {{--    onError:function(message, element, status){--}}
-        {{--        alert(message);--}}
-        {{--    }--}}
-        {{--});--}}
-
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            }
+        });
     </script>
-
-{{--   -------}}
 
 @endpush
 

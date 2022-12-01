@@ -260,15 +260,15 @@
 {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
 {{--<script src="{{asset('assets/js/plugins/bootstrap-selectpicker.js')}}"></script>--}}
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="{{asset('assets/js/plugins/bootstrap-datetimepicker.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/plugins/bootstrap-datetimepicker.min.js')}}"></script>--}}
 <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
 <script src="{{asset('assets/js/plugins/jquery.dataTables.min.js')}}"></script>
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="{{asset('assets/js/plugins/bootstrap-tagsinput.js')}}"></script>
 <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="{{asset('assets/js/plugins/jasny-bootstrap.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/plugins/jasny-bootstrap.min.js')}}"></script>--}}
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="{{asset('assets/js/plugins/nouislider.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/plugins/nouislider.min.js')}}"></script>--}}
 <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 <!-- Library for adding dinamically elements -->

@@ -41,6 +41,39 @@
                     </div>
                 </div>
 
+                <div class="mt-auto ml-auto mr-auto">
+                    <div class="card">
+                        <div class="card-header card-header-rose card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">image</i>
+                            </div>
+                            <h4 class="card-title">Images</h4>
+
+                        </div>
+                        <div class="card-body mt-auto ml-auto mr-auto">
+                            @if(count($files) === 0)
+                                <strong>No images</strong>
+                            @endif
+                            <div class="row">
+                                @for($i=0; $i < count($files); ++$i)
+                                    <div class="col">
+                                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail">
+                                                <a class="thumbnail" href="@if(isset($product)) {{asset('storage/products/'.$files[$i]['name'])}} @endif" target="_blank">
+                                                    <img src="@if(isset($product)) {{asset('storage/products/'.$files[$i]['name'])}} @endif " alt="...">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+
                 <div class="mt-auto ml-auto mr-auto ">
                     <div class="card">
                         <div class="card-header card-header-rose card-header-icon">
@@ -63,32 +96,6 @@
                                     </div>
                                 @endif
                             @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="mt-auto ml-auto mr-auto">
-                    <div class="card">
-                        <div class="card-header card-header-rose card-header-icon">
-                            <div class="card-icon">
-                                <i class="material-icons">image</i>
-                            </div>
-                            <h4 class="card-title">Images</h4>
-
-                        </div>
-                        <div class="card-body mt-auto ml-auto mr-auto">
-                            @if(count($files) === 0)
-                                <strong>No images</strong>
-                            @endif
-                            @for($i=0; $i < count($files); ++$i)
-                                <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                        <div class="fileinput-new thumbnail">
-                                            <img src="@if(isset($product)) {{asset('storage/products/'.$files[$i])}} @endif " alt="...">
-                                        </div>
-                                </div>
-                            @endfor
                         </div>
                     </div>
                 </div>
