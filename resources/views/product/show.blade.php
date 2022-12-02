@@ -23,8 +23,8 @@
                             </div>
 
                             <div class="form-group mt-2" >
-                                <label class="bmd-label-floating mt-2">Description ({{$code}})</label>
-                                <b class="form-control mt-auto"><?=$product->description?></b>
+                                <label class="bmd-label-floating">Description ({{$code}})</label>
+                                <b class="form-control"><?=$product->description?></b>
                             </div>
 
                             <div class="form-group mt-2">

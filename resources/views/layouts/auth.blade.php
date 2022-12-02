@@ -19,8 +19,10 @@
     <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
     <!--Select-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <!--image zoom-->
+    <!--image upload and crop-->
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link href="https://unpkg.com/croppie/croppie.css" rel="stylesheet"/>
+
 </head>
 
 <body class="">
@@ -283,9 +285,9 @@
 <script src="{{asset('assets/js/material-dashboard.js?v=2.2.2')}}" type="text/javascript"></script>
 <!--ckeditor-->
 <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
-<!--image zoom-->
+<!--image upload and crop-->
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+<script src="https://unpkg.com/croppie"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 
 {{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}

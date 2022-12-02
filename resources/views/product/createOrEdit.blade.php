@@ -140,6 +140,9 @@
                                         <div class="alert alert-danger">{{$message}}</div>
                                         @enderror
                                     </div>
+                                    <label class="col-sm-3 label-on-right">
+                                        <code>AMD</code>
+                                    </label>
                                 </div>
 
                                 <div class="row">
@@ -290,12 +293,14 @@
                         console.error(error);
                     });
             }
+
+
         });
 
         Dropzone.autoDiscover = false;
         $('.dropzone').dropzone({
             maxFilesize: 5, //set file upload size
-            acceptedFiles: ".jpeg,.jpg,.png,.gif", // accepted files format
+            acceptedFiles: ".jpeg,.jpg,.png,.gif, .webp", // accepted files format
             addRemoveLinks: true,
             init: function () {
                 let thisDropzone = this;
@@ -324,19 +329,95 @@
 
             removedfile: function(file) {
                 var fileName = file.name;
+                @if(!isset($product))
+                    var fileName = 'temp/' + file.name;
+                @endif
                 console.log(fileName);
                 $.ajax({
                     type: 'POST',
                     url: '/image_delete',
-                    data: {name: fileName, request: 'remove', "_token": "{{ csrf_token() }}"},
+                    data: {name: fileName, "_token": "{{ csrf_token() }}"},
                     sucess: function(data){
                         console.log('success: ' + data);
                     }
                 });
                 var _ref;
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+
+            transformFile: function(file, done) {
+
+                var myDropZone = this;
+
+                // Create the image editor overlay
+                var editor = document.createElement('div');
+                editor.style.position = 'fixed';
+                editor.style.left = 0;
+                editor.style.right = 0;
+                editor.style.top = 0;
+                editor.style.bottom = 0;
+                editor.style.zIndex = 9999;
+                editor.style.backgroundColor = '#0009';
+
+                document.body.appendChild(editor);
+
+                // Create the confirm button
+                var confirm = document.createElement('button');
+                confirm.style.position = 'absolute';
+                confirm.style.left = '10px';
+                confirm.style.top = '10px';
+                confirm.style.zIndex = 9999;
+                confirm.textContent = 'Confirm';
+                confirm.addEventListener('click', function() {
+
+                    // Get the output file data from Croppie
+                    croppie.result({
+                        type:'blob',
+                        size: {
+                            width: 256,
+                            height: 256
+                        }
+                    }).then(function(blob) {
+
+                        // Update the image thumbnail with the new image data
+                        myDropZone.createThumbnail(
+                            blob,
+                            myDropZone.options.thumbnailWidth,
+                            myDropZone.options.thumbnailHeight,
+                            myDropZone.options.thumbnailMethod,
+                            false,
+                            function(dataURL) {
+
+                                // Update the Dropzone file thumbnail
+                                myDropZone.emit('thumbnail', file, dataURL);
+
+                                // Return modified file to dropzone
+                                done(blob);
+                            }
+                        );
+
+                    });
+
+                    // Remove the editor from view
+                    editor.parentNode.removeChild(editor);
+
+                });
+                editor.appendChild(confirm);
+
+                // Create the croppie editor
+                var croppie = new Croppie(editor, {
+                    enableResize: true
+                });
+
+                // Load the image to Croppie
+                croppie.bind({
+                    url: URL.createObjectURL(file)
+                });
+
             }
+
         });
+
     </script>
 
 @endpush
